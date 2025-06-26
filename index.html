@@ -6,16 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Der Schimmelreiter</title>
 
-    <link rel="stylesheet" href="https://use.typekit.net/aja1pvl.css">
+    <link rel="stylesheet" href="https://use.typekit.net/aha5xvd.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Spectral', serif;
             background-color: #0f0f0f;
@@ -23,7 +22,7 @@
             line-height: 1.6;
             scroll-behavior: smooth;
         }
-
+        
         header {
             background-color: #121212;
             padding: 1rem 2rem;
@@ -33,35 +32,38 @@
             z-index: 1000;
             border-bottom: 1px solid #333;
         }
-
+        
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
         }
-
+        
         nav h1 {
+            font-family: "schwarzkopf-new", sans-serif;
+            font-weight: 400;
+            font-style: normal;
             font-size: 1.5rem;
             color: #fff;
         }
-
+        
         nav ul {
             list-style: none;
             display: flex;
             gap: 1rem;
         }
-
+        
         nav a {
             color: #aaa;
             text-decoration: none;
             transition: color 0.3s ease;
         }
-
+        
         nav a:hover {
             color: #fff;
         }
-
+        
         .hero {
             background: linear-gradient(to bottom, #111, #000);
             height: 100vh;
@@ -71,46 +73,77 @@
             text-align: center;
             padding: 2rem;
             animation: fadeIn 2s ease-in;
+            position: relative;
+            background: url("Schimmelreiter/Assets/schimmelreiter.png") center 30% / cover no-repeat;
+            overflow: hidden;
         }
-
-        .hero-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 0;
+        }
+        
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text h2,
+        .content h2,
+        h2 {
+            font-family: "schwarzkopf-new", sans-serif;
+            font-weight: 400;
+            font-style: normal;
             color: #f5f5f5;
         }
-
+        
+        .hero-text .main-title {
+            font-family: "schwarzkopf-new", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-text .subtitle {
+            font-size: 2.5rem;
+        }
+        
         .hero-text p {
             font-size: 1.2rem;
             color: #ccc;
         }
-
+        
         .content {
             padding: 6rem 2rem 2rem;
             max-width: 800px;
             margin: auto;
             animation: fadeInUp 1s ease both;
         }
-
+        
         .content h2 {
             font-size: 2rem;
             margin-bottom: 1rem;
             border-left: 4px solid #b8a6a4;
             padding-left: 0.5rem;
         }
-
+        
         .gallery {
             padding: 6rem 2rem 2rem;
             max-width: 1000px;
             margin: auto;
         }
-
+        
         .image-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
-
+        
         .placeholder {
             background-color: #222;
             border: 1px solid #333;
@@ -121,7 +154,7 @@
             color: #666;
             font-style: italic;
         }
-
+        
         footer {
             text-align: center;
             padding: 2rem;
@@ -129,69 +162,27 @@
             margin-top: 4rem;
             color: #777;
         }
-
+        
         @keyframes fadeIn {
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
         }
-
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            background: url("Schimmelreiter/Assets/schimmelreiter.png") center 30% / cover no-repeat;
-            animation: fadeIn 2s ease-in;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.1);
-            /* Dunkler Schatten */
-            z-index: 0;
-        }
-
-        .hero-text {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Neue Styles für die spezifische Überschrift */
-        .hero-text .main-title {
-            font-family: "fette-fraktur", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 4rem; /* Größer als die andere h2 */
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-text .subtitle {
-            font-size: 2.5rem; /* Etwas kleiner als der Haupttitel, aber immer noch groß */
-        }
-
+        
         .team-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -199,13 +190,13 @@
             margin-top: 2rem;
             justify-items: center;
         }
-
+        
         .team-member {
             text-align: center;
             color: #e0e0e0;
             max-width: 180px;
         }
-
+        
         .team-member img {
             width: 150px;
             height: 150px;
@@ -215,19 +206,19 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             margin-bottom: 0.5rem;
         }
-
+        
         .team-member h3 {
             font-size: 1rem;
             margin-bottom: 0.3rem;
             color: #f5f5f5;
         }
-
+        
         .team-member p {
             font-size: 0.85rem;
             color: #ccc;
             line-height: 1.4;
         }
-
+        
         .character-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -235,13 +226,13 @@
             margin-top: 2rem;
             justify-items: center;
         }
-
+        
         .character-card {
             text-align: center;
             color: #e0e0e0;
             max-width: 180px;
         }
-
+        
         .character-card img {
             width: 150px;
             height: 150px;
@@ -251,45 +242,37 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             margin-bottom: 0.5rem;
         }
-
+        
         .character-card h3 {
             font-size: 1rem;
             margin-bottom: 0.3rem;
             color: #f5f5f5;
         }
-
+        
         .character-card p {
             font-size: 0.85rem;
             color: #ccc;
             line-height: 1.4;
         }
-
-        /* Gemeinsamer Hover-Zoom-Effekt */
+        
         .team-member img,
         .character-card img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin-bottom: 0.5rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .team-member img:hover,
         .character-card img:hover {
             transform: scale(1.1) translateY(-3px);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
-
+        
         .moodboard-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 2rem;
         }
-
+        
         .moodboard-wrapper img {
             width: 100%;
             max-width: 800px;
@@ -300,12 +283,12 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             cursor: zoom-in;
         }
-
+        
         .moodboard-wrapper img:hover {
             transform: scale(1.02);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
         }
-
+        
         .caption {
             margin-top: 0.8rem;
             font-size: 0.9rem;
@@ -414,8 +397,7 @@
     <section id="kontakt" class="content">
         <h2>Kontakt</h2>
         <p>Sie möchten uns unterstützen oder mehr erfahren?<br> Schreiben Sie uns gerne unter:<br>
-            <a href="mailto:kurzfilm.schimmelreiter@web.de">kurzfilm.schimmelreiter@web.de
-            </a></p>
+            <a href="mailto:kurzfilm.schimmelreiter@web.de">kurzfilm.schimmelreiter@web.de</a></p>
     </section>
 
     <footer>
