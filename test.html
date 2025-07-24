@@ -68,6 +68,19 @@
         nav a:hover {
             color: #fff;
         }
+        /* Style for the rider icon in navigation */
+        
+        nav a.rider-link {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        nav a.rider-link .rider-icon {
+            font-size: 1.2rem;
+            /* Adjust size of the emoji/icon */
+            line-height: 1;
+        }
         /* Hero Section Styles */
         
         .hero {
@@ -105,6 +118,7 @@
             font-style: normal;
             color: #f5f5f5;
         }
+        /* Specific style for the main title in hero */
         
         .hero-text .main-title {
             font-family: "schwarzkopf-new", sans-serif;
@@ -113,8 +127,10 @@
             font-size: 4rem;
             margin-bottom: 0.5rem;
         }
+        /* Specific style for the subtitle in hero, now using Spectral font */
         
         .hero-text .subtitle {
+            font-family: 'Spectral', serif;
             font-size: 2.5rem;
         }
         
@@ -141,8 +157,17 @@
         
         .gallery {
             padding: 6rem 2rem 2rem;
-            max-width: 1000px;
+            /* Changed max-width to match .content for consistent alignment */
+            max-width: 800px;
             margin: auto;
+        }
+        /* Apply content h2 style to gallery h2 */
+        
+        .gallery h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #b8a6a4;
+            padding-left: 0.5rem;
         }
         
         .image-grid {
@@ -200,6 +225,8 @@
             gap: 2rem;
             margin-top: 2rem;
             justify-items: center;
+            /* Added padding-left for indentation */
+            padding-left: 1rem;
         }
         
         .team-member {
@@ -228,6 +255,22 @@
             font-size: 0.85rem;
             color: #ccc;
             line-height: 1.4;
+        }
+        /* Added padding-left for the unordered list in team section */
+        
+        .content ul {
+            list-style: disc;
+            /* Ensure disc style is visible */
+            margin-left: 1.5rem;
+            /* Indent the list */
+            margin-bottom: 1rem;
+            /* Space below the list */
+            padding-left: 0.5rem;
+            /* Align with heading's padding */
+        }
+        
+        .content ul li {
+            margin-bottom: 0.5rem;
         }
         /* Character Gallery Styles */
         
@@ -372,7 +415,8 @@
             transform: translateY(-3px);
         }
         
-        .gofundme-cta .qr-code-placeholder {
+        .gofundme-cta .qr-code-link {
+            /* Changed class name to distinguish from placeholder div */
             width: 150px;
             /* Increased size */
             height: 150px;
@@ -389,6 +433,15 @@
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             padding: 5px;
+            text-decoration: none;
+            /* Remove underline from link */
+        }
+        
+        .gofundme-cta .qr-code-link img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            /* Slightly rounded corners for the image inside the link */
         }
         /* Video Module Styles */
         
@@ -468,7 +521,7 @@
                 padding: 12px 20px;
                 font-size: 1rem;
             }
-            .gofundme-cta .qr-code-placeholder {
+            .gofundme-cta .qr-code-link {
                 width: 120px;
                 /* Adjusted for smaller screens */
                 height: 120px;
@@ -494,7 +547,7 @@
             nav a {
                 font-size: 0.9rem;
             }
-            .gofundme-cta .qr-code-placeholder {
+            .gofundme-cta .qr-code-link {
                 width: 100px;
                 /* Adjusted for very small screens */
                 height: 100px;
@@ -512,11 +565,11 @@
             <h1>Der Schimmelreiter</h1>
             <ul>
                 <li><a href="#start">Start</a></li>
-                <li><a href="#inhalt">Inhalt</a></li>
                 <li><a href="#charaktere">Charaktere</a></li>
                 <li><a href="#team">Team</a></li>
                 <li><a href="#galerie">Galerie</a></li>
                 <li><a href="#original-sage">Originalsage</a></li>
+                <li><a href="#projektmappe" class="rider-link"><span class="rider-icon">&#x1F40E;</span> Projektmappe</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
         </nav>
@@ -527,6 +580,9 @@
             <h2 class="main-title">Der Schimmelreiter</h2>
             <h2 class="subtitle">Eine Sage aus dem Hochschwarzwald</h2>
             <p>Ein tyrannischer Vogt, ein verschlepptes Bauernmädchen. Und ein Fluch, der im Nebel erwacht.</p>
+            <br>
+            <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. <br>Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. <br> Als sie dem kopflosen Reiter begegnet, beginnt
+                ein düsteres Spiel zwischen Macht, Schuld und Rache.</p>
         </div>
     </section>
 
@@ -544,12 +600,6 @@
                 Your browser does not support the video tag.
             </video> -->
         </div>
-    </section>
-
-    <section id="inhalt" class="content">
-        <h2>Inhalt</h2>
-        <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. Als sie dem kopflosen Reiter begegnet, beginnt ein düsteres
-            Spiel zwischen Macht, Schuld und Rache.</p>
     </section>
 
     <section id="charaktere" class="content">
@@ -634,6 +684,16 @@
         </p>
     </section>
 
+    <!-- New Projektmappe Section -->
+    <section id="projektmappe" class="content">
+        <h2>Projektmappe</h2>
+        <p>Hier können Sie die vollständige Projektmappe als PDF herunterladen, um mehr über unser Filmprojekt zu erfahren.</p>
+        <p><a href="path/to/your/projektmappe.pdf" target="_blank" download style="color: #b8a6a4; text-decoration: underline;">Projektmappe herunterladen (PDF)</a></p>
+        <p>
+            <small>Hinweis: Dies ist ein Platzhalter-Link. Bitte ersetzen Sie 'path/to/your/projektmappe.pdf' durch den tatsächlichen Pfad zu Ihrer PDF-Datei.</small>
+        </p>
+    </section>
+
     <section id="kontakt" class="content">
         <h2>Kontakt</h2>
         <p>Sie möchten uns unterstützen oder mehr erfahren?<br> Schreiben Sie uns gerne unter:<br>
@@ -649,9 +709,10 @@
         <a href="https://www.gofundme.com/your-project-placeholder" target="_blank" rel="noopener noreferrer">
             Unser Projekt unterstützen!
         </a>
-        <div class="qr-code-placeholder">
-            <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="QR" width="100%">
-        </div>
+        <!-- QR code is now a clickable link -->
+        <a href="https://www.gofundme.com/your-project-placeholder" target="_blank" rel="noopener noreferrer" class="qr-code-link">
+            <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="qr">
+        </a>
     </div>
 
     <script>

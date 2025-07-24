@@ -9,11 +9,14 @@
     <link rel="stylesheet" href="https://use.typekit.net/aha5xvd.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap');
+        /* Universal Box-Sizing */
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        /* Body Styles */
         
         body {
             font-family: 'Spectral', serif;
@@ -22,6 +25,7 @@
             line-height: 1.6;
             scroll-behavior: smooth;
         }
+        /* Header Styles */
         
         header {
             background-color: #121212;
@@ -32,6 +36,7 @@
             z-index: 1000;
             border-bottom: 1px solid #333;
         }
+        /* Navigation Styles */
         
         nav {
             display: flex;
@@ -63,6 +68,20 @@
         nav a:hover {
             color: #fff;
         }
+        /* Style for the rider icon in navigation */
+        
+        nav a.rider-link {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        nav a.rider-link .rider-icon {
+            font-size: 1.2rem;
+            /* Adjust size of the emoji/icon */
+            line-height: 1;
+        }
+        /* Hero Section Styles */
         
         .hero {
             background: linear-gradient(to bottom, #111, #000);
@@ -99,6 +118,7 @@
             font-style: normal;
             color: #f5f5f5;
         }
+        /* Specific style for the main title in hero */
         
         .hero-text .main-title {
             font-family: "schwarzkopf-new", sans-serif;
@@ -107,8 +127,10 @@
             font-size: 4rem;
             margin-bottom: 0.5rem;
         }
+        /* Specific style for the subtitle in hero, now using Spectral font */
         
         .hero-text .subtitle {
+            font-family: 'Spectral', serif;
             font-size: 2.5rem;
         }
         
@@ -116,6 +138,7 @@
             font-size: 1.2rem;
             color: #ccc;
         }
+        /* Content Section Styles */
         
         .content {
             padding: 6rem 2rem 2rem;
@@ -130,11 +153,21 @@
             border-left: 4px solid #b8a6a4;
             padding-left: 0.5rem;
         }
+        /* Gallery Section Styles */
         
         .gallery {
             padding: 6rem 2rem 2rem;
-            max-width: 1000px;
+            /* Changed max-width to match .content for consistent alignment */
+            max-width: 800px;
             margin: auto;
+        }
+        /* Apply content h2 style to gallery h2 */
+        
+        .gallery h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #b8a6a4;
+            padding-left: 0.5rem;
         }
         
         .image-grid {
@@ -154,6 +187,7 @@
             color: #666;
             font-style: italic;
         }
+        /* Footer Styles */
         
         footer {
             text-align: center;
@@ -162,6 +196,7 @@
             margin-top: 4rem;
             color: #777;
         }
+        /* Keyframe Animations */
         
         @keyframes fadeIn {
             from {
@@ -182,6 +217,7 @@
                 transform: translateY(0);
             }
         }
+        /* Team Gallery Styles */
         
         .team-gallery {
             display: grid;
@@ -189,6 +225,8 @@
             gap: 2rem;
             margin-top: 2rem;
             justify-items: center;
+            /* Added padding-left for indentation */
+            padding-left: 1rem;
         }
         
         .team-member {
@@ -218,6 +256,23 @@
             color: #ccc;
             line-height: 1.4;
         }
+        /* Added padding-left for the unordered list in team section */
+        
+        .content ul {
+            list-style: disc;
+            /* Ensure disc style is visible */
+            margin-left: 1.5rem;
+            /* Indent the list */
+            margin-bottom: 1rem;
+            /* Space below the list */
+            padding-left: 0.5rem;
+            /* Align with heading's padding */
+        }
+        
+        .content ul li {
+            margin-bottom: 0.5rem;
+        }
+        /* Character Gallery Styles */
         
         .character-gallery {
             display: grid;
@@ -254,6 +309,7 @@
             color: #ccc;
             line-height: 1.4;
         }
+        /* Image Hover Effects */
         
         .team-member img,
         .character-card img {
@@ -265,6 +321,7 @@
             transform: scale(1.1) translateY(-3px);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
+        /* Moodboard Styles */
         
         .moodboard-wrapper {
             display: flex;
@@ -325,6 +382,180 @@
             font-size: 1.1rem;
             color: #b8a6a4;
         }
+        /* Fixed CTA Styles */
+        
+        .gofundme-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .gofundme-cta a {
+            display: inline-block;
+            background-color: #e04e39;
+            /* GoFundMe-like color */
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .gofundme-cta a:hover {
+            background-color: #c74530;
+            transform: translateY(-3px);
+        }
+        
+        .gofundme-cta .qr-code-link {
+            /* Changed class name to distinguish from placeholder div */
+            width: 150px;
+            /* Increased size */
+            height: 150px;
+            /* Increased size */
+            background-color: #fff;
+            /* White background for QR code */
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            /* Adjusted font size */
+            color: #555;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 5px;
+            text-decoration: none;
+            /* Remove underline from link */
+        }
+        
+        .gofundme-cta .qr-code-link img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            /* Slightly rounded corners for the image inside the link */
+        }
+        /* Video Module Styles */
+        
+        .video-module {
+            padding: 6rem 2rem 2rem;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            animation: fadeInUp 1s ease both;
+        }
+        
+        .video-module h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #b8a6a4;
+            padding-left: 0.5rem;
+            text-align: left;
+            /* Align title to left */
+        }
+        
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            background-color: #222;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+        
+        .video-placeholder iframe,
+        .video-placeholder video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* Media Queries for Responsiveness */
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-text .main-title {
+                font-size: 3rem;
+            }
+            .hero-text .subtitle {
+                font-size: 1.8rem;
+            }
+            .content,
+            .gallery,
+            .original-sage,
+            .video-module {
+                padding: 5rem 1rem 1rem;
+            }
+            .gofundme-cta {
+                bottom: 10px;
+                right: 10px;
+            }
+            .gofundme-cta a {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            .gofundme-cta .qr-code-link {
+                width: 120px;
+                /* Adjusted for smaller screens */
+                height: 120px;
+                /* Adjusted for smaller screens */
+                font-size: 0.8rem;
+                /* Adjusted font size for smaller screens */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-text .main-title {
+                font-size: 2.5rem;
+            }
+            .hero-text .subtitle {
+                font-size: 1.5rem;
+            }
+            nav h1 {
+                font-size: 1.2rem;
+            }
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav a {
+                font-size: 0.9rem;
+            }
+            .gofundme-cta .qr-code-link {
+                width: 100px;
+                /* Adjusted for very small screens */
+                height: 100px;
+                /* Adjusted for very small screens */
+                font-size: 0.7rem;
+                /* Adjusted font size for very small screens */
+            }
+        }
     </style>
 </head>
 
@@ -334,11 +565,11 @@
             <h1>Der Schimmelreiter</h1>
             <ul>
                 <li><a href="#start">Start</a></li>
-                <li><a href="#inhalt">Inhalt</a></li>
                 <li><a href="#charaktere">Charaktere</a></li>
                 <li><a href="#team">Team</a></li>
                 <li><a href="#galerie">Galerie</a></li>
                 <li><a href="#original-sage">Originalsage</a></li>
+                <li><a href="#projektmappe" class="rider-link"><span class="rider-icon">&#x1F40E;</span> Projektmappe</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
         </nav>
@@ -349,35 +580,48 @@
             <h2 class="main-title">Der Schimmelreiter</h2>
             <h2 class="subtitle">Eine Sage aus dem Hochschwarzwald</h2>
             <p>Ein tyrannischer Vogt, ein verschlepptes Bauernmädchen. Und ein Fluch, der im Nebel erwacht.</p>
+            <br>
+            <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. <br>Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. <br> Als sie dem kopflosen Reiter begegnet, beginnt
+                ein düsteres Spiel zwischen Macht, Schuld und Rache.</p>
         </div>
     </section>
 
-    <section id="inhalt" class="content">
-        <h2>Inhalt</h2>
-        <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. Als sie dem kopflosen Reiter begegnet, beginnt ein düsteres
-            Spiel zwischen Macht, Schuld und Rache.</p>
+    <!-- New Video Module Section -->
+    <section id="video" class="video-module">
+        <h2>Trailer / Teaser</h2>
+        <div class="video-placeholder">
+            Video-Platzhalter
+            <!-- You can embed a YouTube video here using an iframe or a <video> tag -->
+            <!-- Example for YouTube: -->
+            <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+            <!-- Example for local video: -->
+            <!-- <video controls>
+                <source src="path/to/your/video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video> -->
+        </div>
     </section>
 
     <section id="charaktere" class="content">
         <h2>Charaktere</h2>
         <div class="character-gallery">
             <div class="character-card">
-                <img src="Schimmelreiter/Assets/KATA.jpg" alt="Katharina">
+                <img src="Schimmelreiter/Assets/KATA.jpg" alt="Katharina" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Katharina';">
                 <h3>Katharina</h3>
                 <p>22 Jahre alt, gläubig, leidet unter Verantwortung für ihre Familie. Wird vom Vogt verschleppt.</p>
             </div>
             <div class="character-card">
-                <img src="Schimmelreiter/Assets/VOGT.jpg" alt="Der Vogt (Johann)">
+                <img src="Schimmelreiter/Assets/VOGT.jpg" alt="Der Vogt (Johann)" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Vogt';">
                 <h3>Der Vogt (Johann)</h3>
                 <p>37 Jahre alt, machtbesessen und gnadenlos. Verkörpert Herrschaft über Leben und Tod.</p>
             </div>
             <div class="character-card">
-                <img src="Schimmelreiter/Assets/JAKOB.jpg" alt="Jakob">
+                <img src="Schimmelreiter/Assets/JAKOB.jpg" alt="Jakob" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Jakob';">
                 <h3>Jakob</h3>
                 <p>20 Jahre, verzweifelter Bruder von Katharina. Vom Wunsch nach Rache getrieben.</p>
             </div>
             <div class="character-card">
-                <img src="Schimmelreiter/Assets/PETER.jpg" alt="Peter">
+                <img src="Schimmelreiter/Assets/PETER.jpg" alt="Peter" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Peter';">
                 <h3>Peter</h3>
                 <p>4 Jahre alt, Katharinas kleiner Bruder. Symbol der Unschuld inmitten der Dunkelheit.</p>
             </div>
@@ -387,29 +631,32 @@
     <section id="team" class="content">
         <h2>Unser Team</h2>
         <ul>
-            <li><strong>Kurt Richard Pätzold</strong> – Kamera und Regie. Hat Erfahrung in Deutschland und Italien gesammelt. [cite: 13, 14, 15]</li>
-            <li><strong>Sami Bouguila</strong> – Ton und Musik. Schauspieler, Moderator und Sounddesigner mit Leidenschaft für Filmmusik. [cite: 16, 17, 18, 19]</li>
-            <li><strong>Amin Lakhal</strong> – Drehbuch und Produktionsassistenz. Visuell und erzählerisch begabt. [cite: 21, 22, 23]</li>
-            <li><strong>Amelie Boehm</strong> – Regie, Drehbuch und Kostüm. Sprachlich kreativ mit journalistischer Erfahrung. [cite: 24, 25, 26]</li>
+            <li><strong>Kurt Richard Pätzold</strong> – Kamera und Regie. Hat Erfahrung in Deutschland und Italien gesammelt.
+            </li>
+            <li><strong>Sami Bouguila</strong> – Ton und Musik. Schauspieler, Moderator und Sounddesigner mit Leidenschaft für Filmmusik.</li>
+            <li><strong>Amin Lakhal</strong> – Drehbuch und Produktionsassistenz. Visuell und erzählerisch begabt.
+            </li>
+            <li><strong>Amelie Boehm</strong> – Regie, Drehbuch und Kostüm. Sprachlich kreativ mit journalistischer Erfahrung.
+            </li>
         </ul>
         <div class="team-gallery">
             <div class="team-member">
-                <img src="Schimmelreiter/Assets/KURT.jpg" alt="Kurt Richard Pätzold">
+                <img src="Schimmelreiter/Assets/KURT.jpg" alt="Kurt Richard Pätzold" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Kurt';">
                 <h3>Kurt Richard Pätzold</h3>
                 <p>Kamera & Regie<br>Erfahrung in Deutschland & Italien</p>
             </div>
             <div class="team-member">
-                <img src="Schimmelreiter/Assets/SAMI.jpg" alt="Sami Bouguila">
+                <img src="Schimmelreiter/Assets/SAMI.jpg" alt="Sami Bouguila" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Sami';">
                 <h3>Sami Bouguila</h3>
                 <p>Ton & Musik<br>Erfahrung in Moderation & Sounddesign</p>
             </div>
             <div class="team-member">
-                <img src="Schimmelreiter/Assets/AMIN.jpg" alt="Amin Lakhal">
+                <img src="Schimmelreiter/Assets/AMIN.jpg" alt="Amin Lakhal" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Amin';">
                 <h3>Amin Lakhal</h3>
                 <p>Drehbuch & Assistenz<br>Visuell und erzählerisch stark</p>
             </div>
             <div class="team-member">
-                <img src="Schimmelreiter/Assets/AME.jpg" alt="Amelie Boehm">
+                <img src="Schimmelreiter/Assets/AME.jpg" alt="Amelie Boehm" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Amelie';">
                 <h3>Amelie Boehm</h3>
                 <p>Regie, Kostüm & Drehbuch<br>Sprachlich kreativ mit Erfahrung</p>
             </div>
@@ -419,22 +666,32 @@
     <section id="galerie" class="gallery">
         <h2>Galerie</h2>
         <div class="moodboard-wrapper">
-            <img src="Schimmelreiter/Assets/MOODBOARD.jpg" alt="Moodboard">
+            <img src="Schimmelreiter/Assets/MOODBOARD.jpg" alt="Moodboard" onerror="this.onerror=null;this.src='https://placehold.co/800x450/222/666?text=Moodboard';">
             <p class="caption">Moodboard – Visuelle Inspiration für Stimmung, Farben & Stil</p>
         </div>
     </section>
 
     <section id="original-sage" class="original-sage">
         <h2>Die Originalsage</h2>
-        <p class="quote">"Wer den Wald mit Blut tränkt, wird ewig in ihm reiten." [cite: 48]</p>
-        <p>Die Originalsage "Der Schimmelreiter von Hammereisenbach" erzählt von einem verhassten Vogt der Burg Neufürstenberg, der die Bauern zu Frondiensten zwang und Materiallieferungen einforderte. [cite: 49, 50] Im 16. Jahrhundert spitzte sich die Lage
-            zu, und die Bauern lehnten sich gegen den Tyrannen auf, indem sie ihm bei der Jagd auflauerten. [cite: 51]</p>
-        <p>Der Vogt, der die Gefahr witterte, ließ die Hufeisen seines Pferdes verkehrt herum aufschlagen, um die Bauern auf eine falsche Fährte zu locken. [cite: 52] Doch die Bauern durchschauten seine Intrige, was ihre Wut nur noch mehr schürte. [cite:
-            53] Als der Vogt erkannte, dass er nicht mehr sicher war, beschloss er, verkleidet als einfacher Knecht, nach Freiburg zu fliehen und ritt in Richtung Urach. [cite: 54, 55]</p>
-        <p>Doch die Bauern lauerten ihm in der ganzen Umgebung auf, überwältigten ihn, rissen ihn von seinem Schimmel und schlugen ihm den Kopf ab. [cite: 56, 57] Seit jeher soll der Vogt auf seinem Schimmel umhergeistern und seinen Kopf auf einem Silbertablett
-            unter dem Arm tragen, wodurch seine Schreckensherrschaft ewig fortwährt. [cite: 58]</p>
-        <img src="Schimmelreiter/Assets/SCHIMMELREITER_SAGE.jpg" alt="Der Schimmelreiter" class="sage-image">
-        <p>Unsere Verfilmung stellt die Frage: Was, wenn der Vogt den Bauern außer Abgaben noch etwas anderes genommen hat? [cite: 60] Wenn seine Schreckensherrschaft noch viel tiefer reicht und dunkle Mächte ihre Finger im Spiel haben? [cite: 61]</p>
+        <p class="quote">"Wer den Wald mit Blut tränkt, wird ewig in ihm reiten."</p>
+        <p>Die Originalsage "Der Schimmelreiter von Hammereisenbach" erzählt von einem verhassten Vogt der Burg Neufürstenberg, der die Bauern zu Frondiensten zwang und Materiallieferungen einforderte. Im 16. Jahrhundert spitzte sich die Lage zu, und die
+            Bauern lehnten sich gegen den Tyrannen auf, indem sie ihm bei der Jagd auflauerten.</p>
+        <p>Der Vogt, der die Gefahr witterte, ließ die Hufeisen seines Pferdes verkehrt herum aufschlagen, um die Bauern auf eine falsche Fährte zu locken. Doch die Bauern durchschauten seine Intrige, was ihre Wut nur noch mehr schürte. Als der Vogt erkannte,
+            dass er nicht mehr sicher war, beschloss er, verkleidet als einfacher Knecht, nach Freiburg zu fliehen und ritt in Richtung Urach.</p>
+        <p>Doch die Bauern lauerten ihm in der ganzen Umgebung auf, überwältigten ihn, rissen ihn von seinem Schimmel und schlugen ihm den Kopf ab. Seit jeher soll der Vogt auf seinem Schimmel umhergeistern und seinen Kopf auf einem Silbertablett unter dem
+            Arm tragen, wodurch seine Schreckensherrschaft ewig fortwährt.</p>
+        <p>Unsere Verfilmung stellt die Frage: Was, wenn der Vogt den Bauern außer Abgaben noch etwas anderes genommen hat? Wenn seine Schreckensherrschaft noch viel tiefer reicht und dunkle Mächte ihre Finger im Spiel haben?
+        </p>
+    </section>
+
+    <!-- New Projektmappe Section -->
+    <section id="projektmappe" class="content">
+        <h2>Projektmappe</h2>
+        <p>Hier können Sie die vollständige Projektmappe als PDF herunterladen, um mehr über unser Filmprojekt zu erfahren.</p>
+        <p><a href="path/to/your/projektmappe.pdf" target="_blank" download style="color: #b8a6a4; text-decoration: underline;">Projektmappe herunterladen (PDF)</a></p>
+        <p>
+            <small>Hinweis: Dies ist ein Platzhalter-Link. Bitte ersetzen Sie 'path/to/your/projektmappe.pdf' durch den tatsächlichen Pfad zu Ihrer PDF-Datei.</small>
+        </p>
     </section>
 
     <section id="kontakt" class="content">
@@ -447,7 +704,19 @@
         <p>&copy; 2025 Der Schimmelreiter – Ein Kurzfilmprojekt aus dem Hochschwarzwald</p>
     </footer>
 
+    <!-- GoFundMe CTA and QR Code -->
+    <div class="gofundme-cta">
+        <a href="https://www.gofundme.com/your-project-placeholder" target="_blank" rel="noopener noreferrer">
+            Unser Projekt unterstützen!
+        </a>
+        <!-- QR code is now a clickable link -->
+        <a href="https://www.gofundme.com/your-project-placeholder" target="_blank" rel="noopener noreferrer" class="qr-code-link">
+            <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="qr">
+        </a>
+    </div>
+
     <script>
+        // Smooth scrolling for navigation links
         const navLinks = document.querySelectorAll('nav a');
         navLinks.forEach(link => {
             link.addEventListener('click', e => {
