@@ -433,51 +433,102 @@
             width: 100%;
         }
         
-        .sidebar .support-links .gofundme-btn,
-        .sidebar .support-links .paypal-btn {
-            background-color: #e04e39;
-            /* GoFundMe-like color */
-            color: #fff;
-            padding: 10px 15px;
+        .sidebar .gofundme-link,
+        .sidebar .paypal-link {
+            display: flex;
+            /* Use flex for image inside link */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
             border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+            border: 2px solid transparent;
+            /* Initial transparent border */
+        }
+        
+        .sidebar .gofundme-link:hover,
+        .sidebar .paypal-link:hover,
+        .sidebar .gofundme-link:active,
+        /* Add active state for click effect */
+        
+        .sidebar .paypal-link:active {
+            background-color: #c74530;
+            /* Reddish on hover/active */
+            transform: translateY(-2px);
+            border-color: #e04e39;
+            /* Red border on hover/active */
+        }
+        
+        .sidebar .gofundme-link p,
+        .sidebar .paypal-link p {
+            color: #fff;
             font-weight: bold;
             font-size: 0.9rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 5px;
+            /* Space between image and text */
         }
         
-        .sidebar .support-links .gofundme-btn:hover,
-        .sidebar .support-links .paypal-btn:hover {
-            background-color: #c74530;
-            transform: translateY(-2px);
-        }
-        
-        .sidebar .support-links .paypal-img {
-            max-width: 100%;
+        .sidebar .gofundme-img,
+        .sidebar .paypal-img {
+            max-width: 100px;
+            /* Adjusted size for images in sidebar */
             height: auto;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
         
-        .sidebar .support-links .paypal-img:hover {
+        .sidebar .gofundme-img:hover,
+        .sidebar .paypal-img:hover {
             transform: scale(1.05);
         }
+        /* --- GEÄNDERT: Styles für Unterstützer-Logos --- */
         
-        .sidebar .supporter-logo {
+        .sidebar .supporter-logo-link {
+            display: flex;
+            /* Flexbox für Zentrierung des Bildes */
+            justify-content: center;
+            /* Zentriert horizontal */
+            align-items: center;
+            /* Zentriert vertikal */
             width: 100%;
-            max-width: 120px;
-            /* Max width for supporter logos */
-            height: auto;
-            margin-bottom: 10px;
+            padding: 5px;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            background-color: transparent;
+            /* Standardmäßig transparent */
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            border: 2px solid transparent;
+            /* Initial transparent border */
+            height: 80px;
+            /* Einheitliche Höhe für den Link-Container */
         }
         
-        .sidebar .supporter-logo:hover {
-            transform: scale(1.05);
+        .sidebar .supporter-logo-link:hover,
+        .sidebar .supporter-logo-link:active {
+            background-color: #28a745;
+            /* Grün beim Hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border-color: #218838;
+            /* Grüner Rand beim Hover */
         }
+        
+        .sidebar .supporter-logo-link img {
+            width: auto;
+            /* Breite automatisch anpassen */
+            height: 70px;
+            /* Einheitliche Höhe für die Bilder */
+            max-width: 100%;
+            /* Sicherstellen, dass das Bild nicht überläuft */
+            object-fit: contain;
+            /* Bild in den Container einpassen, ohne es zu beschneiden */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        /* --- ENDE GEÄNDERT --- */
         /* Video Module Styles */
         
         .video-module {
@@ -564,15 +615,28 @@
                 justify-content: center;
                 gap: 15px;
             }
-            .sidebar .supporter-logo {
-                max-width: 100px;
-                /* Smaller logos on smaller screens */
+            .sidebar .gofundme-link,
+            .sidebar .paypal-link,
+            .sidebar .supporter-logo-link {
+                width: auto;
+                /* Allow items to shrink on smaller screens */
+                flex-basis: 45%;
+                /* Approx half width for two columns */
+                max-width: 150px;
+                /* Limit individual item width */
             }
-            .content,
-            .gallery,
-            .original-sage,
-            .video-module {
-                padding: 5rem 1rem 1rem;
+            .sidebar .gofundme-link p,
+            .sidebar .paypal-link p {
+                font-size: 0.8rem;
+            }
+            .sidebar .gofundme-img,
+            .sidebar .paypal-img {
+                max-width: 80px;
+                /* Smaller images on smaller screens */
+            }
+            .sidebar .supporter-logo-link img {
+                height: 60px;
+                /* Slightly smaller on mobile */
             }
         }
         
@@ -592,11 +656,6 @@
             .hero-text .subtitle {
                 font-size: 1.8rem;
             }
-            .sidebar .support-links .gofundme-btn,
-            .sidebar .support-links .paypal-btn {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
         }
         
         @media (max-width: 480px) {
@@ -614,6 +673,13 @@
             }
             nav a {
                 font-size: 0.9rem;
+            }
+            .sidebar .gofundme-link,
+            .sidebar .paypal-link,
+            .sidebar .supporter-logo-link {
+                flex-basis: 90%;
+                /* Single column layout on very small screens */
+                max-width: 200px;
             }
         }
     </style>
@@ -739,7 +805,7 @@
     <section id="projektmappe" class="content">
         <h2>Projektmappe</h2>
         <p>Hier können Sie die vollständige Projektmappe als PDF herunterladen, um mehr über unser Filmprojekt zu erfahren.</p>
-        <p><a href="path/to/your/projektmappe.pdf" target="_blank" download style="color: #b8a6a4; text-decoration: underline;">Projektmappe herunterladen (PDF)</a></p>
+        <p><a href="https://raw.githubusercontent.com/AminLakhal/Schimmelreiter/main/Schimmelreiter/Assets/Projektmappe%20-%20Der%20Schimmelreiter%20Eine%20Sage%20aus%20dem%20Schwarzwald.pdf" target="_blank" download style="color: #b8a6a4; text-decoration: underline;">Projektmappe herunterladen (PDF)</a></p>
         <p>
             <small>Hinweis: Dies ist ein Platzhalter-Link. Bitte ersetzen Sie 'path/to/your/projektmappe.pdf' durch den tatsächlichen Pfad zu Ihrer PDF-Datei.</small>
         </p>
@@ -758,14 +824,25 @@
     <div class="sidebar">
         <h3>Support & Partner</h3>
         <div class="support-links">
-            <a href="https://www.gofundme.com/your-project-placeholder" target="_blank" rel="noopener noreferrer" class="gofundme-btn">
-                GoFundMe unterstützen!
+            <a href="https://www.gofundme.com/f/kurzfilm-schwarzwaldsage-der-schimmelreiter" target="_blank" rel="noopener noreferrer" class="gofundme-link">
+                <img src="Schimmelreiter/Assets/gofundme-logo-png_seeklogo-447152.png" alt="GoFundMe Bild" class="gofundme-img" onerror="this.onerror=null;this.src='https://placehold.co/100x60/222/666?text=GoFundMe+Bild';">
+                <p>Jetzt unterstützen!</p>
             </a>
-            <a href="https://www.paypal.me/yourprojectplaceholder" target="_blank" rel="noopener noreferrer" class="paypal-btn">
-                <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="PayPal QR Code" class="paypal-img">
+            <a href="https://www.paypal.com/qrcodes/managed/d93e012f-92b5-463d-ad9f-21aa31673c8d?utm_source=consweb_more" target="_blank" rel="noopener noreferrer" class="paypal-link">
+                <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="PayPal QR Code" class="paypal-img" onerror="this.onerror=null;this.src='https://placehold.co/100x100/222/666?text=PayPal+QR';">
+                <p>Per PayPal spenden</p>
             </a>
-            <img src="Schimmelreiter/Assets/Supporter_Logo_1.jpg" alt="Supporter 1" class="supporter-logo" onerror="this.onerror=null;this.src='https://placehold.co/120x60/333/ccc?text=Supporter 1';">
-            <img src="Schimmelreiter/Assets/Supporter_Logo_2.jpg" alt="Supporter 2" class="supporter-logo" onerror="this.onerror=null;this.src='https://placehold.co/120x60/333/ccc?text=Supporter 2';">
+
+            <a href="#" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
+                <img src="Schimmelreiter/Assets/furtwangen logo.jpg" alt="Stadt Furtwangen" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter 1';">
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
+                <img src="Schimmelreiter/Assets/2412200721_logo.jpg" alt="Stadt Vöhrebach" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter 2';">
+            </a>
+
+            <a href="#" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
+                <img src="Schimmelreiter/Assets/Campus galli Logo.jpeg" alt="Campus Galli" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter 2';">
+            </a>
         </div>
     </div>
 
