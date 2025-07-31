@@ -24,6 +24,8 @@
             color: #e0e0e0;
             line-height: 1.6;
             scroll-behavior: smooth;
+            padding-right: 180px;
+            /* Space for the fixed sidebar */
         }
         /* Header Styles */
         
@@ -31,8 +33,10 @@
             background-color: #121212;
             padding: 1rem 2rem;
             position: fixed;
-            width: 100%;
+            width: calc(100% - 180px);
+            /* Adjust width for sidebar */
             top: 0;
+            left: 0;
             z-index: 1000;
             border-bottom: 1px solid #333;
         }
@@ -382,66 +386,97 @@
             font-size: 1.1rem;
             color: #b8a6a4;
         }
-        /* Fixed CTA Styles */
+        /* Sidebar Styles */
         
-        .gofundme-cta {
+        .sidebar {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
+            top: 0;
+            right: 0;
+            width: 180px;
+            /* Width of the sidebar */
+            height: 100%;
+            background-color: #1a1a1a;
+            border-left: 1px solid #333;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 1rem;
+            overflow-y: auto;
+            /* Enable scrolling for many logos */
+            z-index: 1100;
+            /* Higher than header */
         }
         
-        .gofundme-cta a {
-            display: inline-block;
+        .sidebar h3 {
+            font-family: "schwarzkopf-new", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 1.2rem;
+            color: #f5f5f5;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .sidebar a {
+            display: block;
+            /* Make links block-level for easier clicking */
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .sidebar .support-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .sidebar .support-links .gofundme-btn,
+        .sidebar .support-links .paypal-btn {
             background-color: #e04e39;
             /* GoFundMe-like color */
             color: #fff;
-            padding: 15px 25px;
+            padding: 10px 15px;
             border-radius: 8px;
-            text-decoration: none;
             font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            text-align: center;
-        }
-        
-        .gofundme-cta a:hover {
-            background-color: #c74530;
-            transform: translateY(-3px);
-        }
-        
-        .gofundme-cta .qr-code-link {
-            /* Changed class name to distinguish from placeholder div */
-            width: 150px;
-            /* Increased size */
-            height: 150px;
-            /* Increased size */
-            background-color: #fff;
-            /* White background for QR code */
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 0.9rem;
-            /* Adjusted font size */
-            color: #555;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            padding: 5px;
-            text-decoration: none;
-            /* Remove underline from link */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         
-        .gofundme-cta .qr-code-link img {
+        .sidebar .support-links .gofundme-btn:hover,
+        .sidebar .support-links .paypal-btn:hover {
+            background-color: #c74530;
+            transform: translateY(-2px);
+        }
+        
+        .sidebar .support-links .paypal-img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
-            /* Slightly rounded corners for the image inside the link */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar .support-links .paypal-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .sidebar .supporter-logo {
+            width: 100%;
+            max-width: 120px;
+            /* Max width for supporter logos */
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar .supporter-logo:hover {
+            transform: scale(1.05);
         }
         /* Video Module Styles */
         
@@ -491,6 +526,56 @@
         }
         /* Media Queries for Responsiveness */
         
+        @media (max-width: 992px) {
+            /* Adjust breakpoint for sidebar */
+            body {
+                padding-right: 0;
+                /* Remove padding for smaller screens */
+            }
+            header {
+                width: 100%;
+                /* Full width header */
+            }
+            .sidebar {
+                position: relative;
+                /* Make sidebar flow with content */
+                width: 100%;
+                /* Full width */
+                height: auto;
+                border-left: none;
+                border-top: 1px solid #333;
+                padding-top: 2rem;
+                order: 1;
+                /* Place it after the main content */
+                flex-direction: row;
+                /* Arrange items horizontally */
+                flex-wrap: wrap;
+                /* Allow wrapping */
+                justify-content: center;
+            }
+            .sidebar h3 {
+                width: 100%;
+                /* Occupy full width */
+                margin-bottom: 1rem;
+            }
+            .sidebar .support-links {
+                flex-direction: row;
+                /* Keep buttons side-by-side */
+                justify-content: center;
+                gap: 15px;
+            }
+            .sidebar .supporter-logo {
+                max-width: 100px;
+                /* Smaller logos on smaller screens */
+            }
+            .content,
+            .gallery,
+            .original-sage,
+            .video-module {
+                padding: 5rem 1rem 1rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             nav {
                 flex-direction: column;
@@ -507,27 +592,10 @@
             .hero-text .subtitle {
                 font-size: 1.8rem;
             }
-            .content,
-            .gallery,
-            .original-sage,
-            .video-module {
-                padding: 5rem 1rem 1rem;
-            }
-            .gofundme-cta {
-                bottom: 10px;
-                right: 10px;
-            }
-            .gofundme-cta a {
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
-            .gofundme-cta .qr-code-link {
-                width: 120px;
-                /* Adjusted for smaller screens */
-                height: 120px;
-                /* Adjusted for smaller screens */
-                font-size: 0.8rem;
-                /* Adjusted font size for smaller screens */
+            .sidebar .support-links .gofundme-btn,
+            .sidebar .support-links .paypal-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
             }
         }
         
@@ -547,14 +615,6 @@
             nav a {
                 font-size: 0.9rem;
             }
-            .gofundme-cta .qr-code-link {
-                width: 100px;
-                /* Adjusted for very small screens */
-                height: 100px;
-                /* Adjusted for very small screens */
-                font-size: 0.7rem;
-                /* Adjusted font size for very small screens */
-            }
         }
     </style>
 </head>
@@ -569,7 +629,7 @@
                 <li><a href="#team">Team</a></li>
                 <li><a href="#galerie">Galerie</a></li>
                 <li><a href="#original-sage">Originalsage</a></li>
-                <li><a href="#projektmappe" class="rider-link"><span class="rider-icon">&#x1F40E;</span> Projektmappe</a></li>
+                <li><a href="#projektmappe" class="rider-link"><span class="rider-icon">🐎</span> Projektmappe</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
         </nav>
@@ -586,19 +646,11 @@
         </div>
     </section>
 
-    <!-- New Video Module Section -->
     <section id="video" class="video-module">
         <h2>Trailer / Teaser</h2>
         <div class="video-placeholder">
-            Video-Platzhalter
-            <!-- You can embed a YouTube video here using an iframe or a <video> tag -->
-            <!-- Example for YouTube: -->
-            <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-            <!-- Example for local video: -->
-            <!-- <video controls>
-                <source src="path/to/your/video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video> -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
         </div>
     </section>
 
@@ -684,7 +736,6 @@
         </p>
     </section>
 
-    <!-- New Projektmappe Section -->
     <section id="projektmappe" class="content">
         <h2>Projektmappe</h2>
         <p>Hier können Sie die vollständige Projektmappe als PDF herunterladen, um mehr über unser Filmprojekt zu erfahren.</p>
@@ -701,18 +752,21 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Der Schimmelreiter – Ein Kurzfilmprojekt aus dem Hochschwarzwald</p>
+        <p>© 2025 Der Schimmelreiter – Ein Kurzfilmprojekt aus dem Hochschwarzwald</p>
     </footer>
 
-    <!-- GoFundMe CTA and QR Code -->
-    <div class="gofundme-cta">
-        <a href="https://www.gofundme.com/your-project-placeholder" target="_blank" rel="noopener noreferrer">
-            Unser Projekt unterstützen!
-        </a>
-        <!-- QR code is now a clickable link -->
-        <a href="https://www.gofundme.com/your-project-placeholder" target="_blank" rel="noopener noreferrer" class="qr-code-link">
-            <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="qr">
-        </a>
+    <div class="sidebar">
+        <h3>Support & Partner</h3>
+        <div class="support-links">
+            <a href="https://www.gofundme.com/your-project-placeholder" target="_blank" rel="noopener noreferrer" class="gofundme-btn">
+                GoFundMe unterstützen!
+            </a>
+            <a href="https://www.paypal.me/yourprojectplaceholder" target="_blank" rel="noopener noreferrer" class="paypal-btn">
+                <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="PayPal QR Code" class="paypal-img">
+            </a>
+            <img src="Schimmelreiter/Assets/Supporter_Logo_1.jpg" alt="Supporter 1" class="supporter-logo" onerror="this.onerror=null;this.src='https://placehold.co/120x60/333/ccc?text=Supporter 1';">
+            <img src="Schimmelreiter/Assets/Supporter_Logo_2.jpg" alt="Supporter 2" class="supporter-logo" onerror="this.onerror=null;this.src='https://placehold.co/120x60/333/ccc?text=Supporter 2';">
+        </div>
     </div>
 
     <script>
