@@ -61,6 +61,10 @@
             list-style: none;
             display: flex;
             gap: 1rem;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 500px;
+            /* Default for desktop */
+            opacity: 1;
         }
         
         nav a {
@@ -84,6 +88,18 @@
             font-size: 1.2rem;
             /* Adjust size of the emoji/icon */
             line-height: 1;
+        }
+        /* New Styles for Hamburger Menu */
+        
+        .menu-toggle {
+            display: none;
+            /* Hidden by default on desktop */
+            background: none;
+            border: none;
+            color: #e0e0e0;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1001;
         }
         /* Hero Section Styles */
         
@@ -616,8 +632,7 @@
                 gap: 15px;
             }
             .sidebar .gofundme-link,
-            .sidebar .paypal-link,
-            .sidebar .supporter-logo-link {
+            .sidebar .paypal-link {
                 width: auto;
                 /* Allow items to shrink on smaller screens */
                 flex-basis: 45%;
@@ -641,20 +656,71 @@
         }
         
         @media (max-width: 768px) {
+            /* Responsive Styles for Header & Nav */
+            header {
+                padding: 1rem;
+            }
             nav {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            nav h1 {
+                margin: 0;
             }
             nav ul {
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #121212;
+                width: 100%;
+                padding: 1rem 2rem;
+                max-height: 0;
+                opacity: 0;
+                overflow: hidden;
+                border-top: 1px solid #333;
+                align-items: flex-start;
+                gap: 1rem;
+                z-index: 999;
+            }
+            nav ul.active {
+                max-height: 500px;
+                opacity: 1;
+            }
+            .menu-toggle {
+                display: block;
             }
             .hero-text .main-title {
                 font-size: 3rem;
             }
             .hero-text .subtitle {
                 font-size: 1.8rem;
+            }
+            /* Responsive Styles for Footer Carousel */
+            .sidebar .supporter-logos {
+                display: flex;
+                overflow-x: scroll;
+                -webkit-overflow-scrolling: touch;
+                /* for smooth scrolling on iOS */
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+                padding: 1rem 0;
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .sidebar .supporter-logo-link {
+                flex-shrink: 0;
+                width: 100px;
+                height: auto;
+                scroll-snap-align: start;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 5px;
+            }
+            .sidebar .supporter-logo-link img {
+                height: 50px;
             }
         }
         
@@ -675,8 +741,7 @@
                 font-size: 0.9rem;
             }
             .sidebar .gofundme-link,
-            .sidebar .paypal-link,
-            .sidebar .supporter-logo-link {
+            .sidebar .paypal-link {
                 flex-basis: 90%;
                 /* Single column layout on very small screens */
                 max-width: 200px;
@@ -689,7 +754,10 @@
     <header>
         <nav>
             <h1>Der Schimmelreiter</h1>
-            <ul>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="main-navigation">
+                &#9776;
+            </button>
+            <ul id="main-navigation">
                 <li><a href="#start">Start</a></li>
                 <li><a href="#charaktere">Charaktere</a></li>
                 <li><a href="#team">Team</a></li>
@@ -707,16 +775,14 @@
             <h2 class="subtitle">Eine Sage aus dem Hochschwarzwald</h2>
             <p>Ein tyrannischer Vogt, ein verschlepptes Bauernmädchen. Und ein Fluch, der im Nebel erwacht.</p>
             <br>
-            <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. <br>Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. <br> Als sie dem kopflosen Reiter begegnet, beginnt
-                ein düsteres Spiel zwischen Macht, Schuld und Rache.</p>
         </div>
     </section>
 
     <section id="video" class="video-module">
         <h2>Trailer / Teaser</h2>
         <div class="video-placeholder">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nItFJ1XayBE?si=BaHxPPI5ikkBvWTd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </section>
 
@@ -791,6 +857,8 @@
 
     <section id="original-sage" class="original-sage">
         <h2>Die Originalsage</h2>
+        <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. <br>Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. <br> Als sie dem kopflosen Reiter begegnet, beginnt
+            ein düsteres Spiel zwischen Macht, Schuld und Rache.</p>
         <p class="quote">"Wer den Wald mit Blut tränkt, wird ewig in ihm reiten."</p>
         <p>Die Originalsage "Der Schimmelreiter von Hammereisenbach" erzählt von einem verhassten Vogt der Burg Neufürstenberg, der die Bauern zu Frondiensten zwang und Materiallieferungen einforderte. Im 16. Jahrhundert spitzte sich die Lage zu, und die
             Bauern lehnten sich gegen den Tyrannen auf, indem sie ihm bei der Jagd auflauerten.</p>
@@ -832,16 +900,16 @@
                 <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="PayPal QR Code" class="paypal-img" onerror="this.onerror=null;this.src='https://placehold.co/100x100/222/666?text=PayPal+QR';">
                 <p>Per PayPal spenden</p>
             </a>
-
-            <a href="#" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
-                <img src="Schimmelreiter/Assets/furtwangen logo.jpg" alt="Stadt Furtwangen" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter 1';">
+        </div>
+        <div class="supporter-logos">
+            <a href="https://www.furtwangen.de/startseite" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
+                <img src="Schimmelreiter/Assets/furtwangen logo.jpg" alt="Stadt Furtwangen" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter+1';">
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
-                <img src="Schimmelreiter/Assets/2412200721_logo.jpg" alt="Stadt Vöhrebach" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter 2';">
+            <a href="https://www.voehrenbach.de/startseite" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
+                <img src="Schimmelreiter/Assets/2412200721_logo.jpg" alt="Stadt Vöhrenbach" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter+2';">
             </a>
-
-            <a href="#" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
-                <img src="Schimmelreiter/Assets/Campus galli Logo.jpeg" alt="Campus Galli" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter 2';">
+            <a href="https://www.campus-galli.de/" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
+                <img src="Schimmelreiter/Assets/Campus galli Logo.jpeg" alt="Campus Galli" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter+3';">
             </a>
         </div>
     </div>
@@ -857,6 +925,15 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        // Toggle mobile navigation menu
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('nav ul');
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            navUl.classList.toggle('active');
         });
     </script>
 </body>
