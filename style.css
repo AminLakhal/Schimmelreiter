@@ -519,3 +519,13 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
     .page-hero .inner > *, .frame > *, .topbar.open ul li, .lightbox img { animation-name: pageIn; }
     .card:hover, .teaser:hover, .btn:hover { transform: none; }
 }
+
+/* Galerie: alle Bilder gleich groß wie die Instagram-Kacheln */
+.gallery { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); grid-auto-rows: auto; }
+.g-item, .g-item.wide, .g-item.full { grid-column: auto; grid-row: auto; aspect-ratio: 4/5; }
+@media (max-width: 700px) {
+    .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
+    .g-item, .g-item.wide, .g-item.full, .g-item.wide:first-child { grid-column: auto; grid-row: auto; }
+}
+
+.block.center > .eyebrow, .block.center > h2 { text-align: center; }
