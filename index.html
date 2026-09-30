@@ -5,936 +5,645 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Der Schimmelreiter</title>
-
     <link rel="stylesheet" href="https://use.typekit.net/aha5xvd.css">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap');
-        /* Universal Box-Sizing */
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #05080a;
+            --ink: #e8ecee;
+            --muted: #9aa6ab;
+            --accent: #b8a6a4;
+            --gold: #d8c08a;
+            --line: rgba(255, 255, 255, .14);
+            --glass: rgba(6, 12, 16, .45);
         }
-        /* Body Styles */
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Spectral', serif;
-            background-color: #0f0f0f;
-            color: #e0e0e0;
+            background: var(--bg);
+            color: var(--ink);
             line-height: 1.6;
-            scroll-behavior: smooth;
-            padding-right: 180px;
-            /* Space for the fixed sidebar */
         }
-        /* Header Styles */
-        
-        header {
-            background-color: #121212;
-            padding: 1rem 2rem;
-            position: fixed;
-            width: calc(100% - 180px);
-            /* Adjust width for sidebar */
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #333;
-        }
-        /* Navigation Styles */
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        nav h1 {
-            font-family: "schwarzkopf-new", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 1.5rem;
-            color: #fff;
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
-            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-            max-height: 500px;
-            /* Default for desktop */
-            opacity: 1;
-        }
-        
-        nav a {
-            color: #aaa;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        nav a:hover {
-            color: #fff;
-        }
-        /* Style for the rider icon in navigation */
-        
-        nav a.rider-link {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        
-        nav a.rider-link .rider-icon {
-            font-size: 1.2rem;
-            /* Adjust size of the emoji/icon */
-            line-height: 1;
-        }
-        /* New Styles for Hamburger Menu */
-        
-        .menu-toggle {
-            display: none;
-            /* Hidden by default on desktop */
-            background: none;
-            border: none;
-            color: #e0e0e0;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        /* Hero Section Styles */
-        
-        .hero {
-            background: linear-gradient(to bottom, #111, #000);
-            height: 100vh;
+
+        a { color: inherit; }
+
+        /* ---------- Front page ---------- */
+        .front {
+            position: relative;
+            min-height: 100vh;
+            padding: 5vh 5vw;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            animation: fadeIn 2s ease-in;
-            position: relative;
-            background: url("Schimmelreiter/Assets/schimmelreiter.png") center 30% / cover no-repeat;
             overflow: hidden;
+            background: #0a1519;
         }
-        
-        .hero::before {
+
+        /* Bereich unter der Front page: Pferd als Hintergrund, unten ausgeblendet */
+        .horse {
+            position: relative;
+            padding-bottom: 4rem;
+        }
+
+        .horse::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: min(150vh, 1400px);
+            background:
+                linear-gradient(to bottom, var(--bg) 0%, rgba(5, 8, 10, 0) 15%, rgba(5, 8, 10, 0) 55%, var(--bg) 100%),
+                url("Schimmelreiter/Assets/schimmelreiter_blau.jpg") center top / cover no-repeat;
+            filter: brightness(1.5);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .horse > * { position: relative; z-index: 1; }
+
+        .front video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .front::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.1);
-            z-index: 0;
-        }
-        
-        .hero-text {
-            position: relative;
+            background:
+                radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, .75) 100%),
+                linear-gradient(to bottom, rgba(0, 0, 0, .25), rgba(0, 0, 0, .55));
             z-index: 1;
         }
-        
-        .hero-text h2,
-        .content h2,
-        h2 {
-            font-family: "schwarzkopf-new", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            color: #f5f5f5;
-        }
-        /* Specific style for the main title in hero */
-        
-        .hero-text .main-title {
-            font-family: "schwarzkopf-new", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 4rem;
-            margin-bottom: 0.5rem;
-        }
-        /* Specific style for the subtitle in hero, now using Spectral font */
-        
-        .hero-text .subtitle {
-            font-family: 'Spectral', serif;
-            font-size: 2.5rem;
-        }
-        
-        .hero-text p {
-            font-size: 1.2rem;
-            color: #ccc;
-        }
-        /* Content Section Styles */
-        
-        .content {
-            padding: 6rem 2rem 2rem;
-            max-width: 800px;
-            margin: auto;
-            animation: fadeInUp 1s ease both;
-        }
-        
-        .content h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid #b8a6a4;
-            padding-left: 0.5rem;
-        }
-        /* Gallery Section Styles */
-        
-        .gallery {
-            padding: 6rem 2rem 2rem;
-            /* Changed max-width to match .content for consistent alignment */
-            max-width: 800px;
-            margin: auto;
-        }
-        /* Apply content h2 style to gallery h2 */
-        
-        .gallery h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid #b8a6a4;
-            padding-left: 0.5rem;
-        }
-        
-        .image-grid {
+
+        .frame {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1280px;
+            min-height: 86vh;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            grid-template-rows: auto 1fr auto auto;
+            padding: 2rem 2.5rem;
+            background: var(--glass);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+            animation: fadeIn 1.6s ease both;
         }
-        
-        .placeholder {
-            background-color: #222;
-            border: 1px solid #333;
-            height: 200px;
+
+        .topbar {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: .85rem;
+        }
+
+        .topbar ul { list-style: none; display: flex; gap: 1.4rem; }
+        .topbar ul.right { justify-content: flex-end; }
+        .topbar a { text-decoration: none; color: #d6dcdf; transition: color .3s; }
+        .topbar a:hover { color: #fff; }
+
+        .brand {
+            font-family: "schwarzkopf-new", serif;
+            font-size: 1.8rem;
+            letter-spacing: .04em;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--ink);
+            font-size: 1.8rem;
+            cursor: pointer;
+            justify-self: end;
+        }
+
+        .front-mid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-top: 2.5rem;
+            gap: 2rem;
+        }
+
+        .watch {
+            width: 150px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: .85rem;
+        }
+
+        .watch .thumb {
+            width: 150px;
+            aspect-ratio: 16/10;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: url("Schimmelreiter/Assets/teaser_poster.jpg") center / cover;
+            margin-bottom: .6rem;
+            transition: transform .3s, border-color .3s;
+        }
+
+        .watch:hover .thumb { transform: translateY(-3px); border-color: #fff; }
+
+        /* Awards */
+        .awards {
+            display: flex;
+            gap: 1.6rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .laurel {
+            display: flex;
+            align-items: center;
+            gap: .2rem;
+            color: var(--gold);
+            text-align: center;
+        }
+
+        .laurel svg { width: 34px; height: 78px; flex-shrink: 0; }
+        .laurel svg.r { transform: scaleX(-1); }
+
+        .laurel .txt {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.25;
+            min-width: 92px;
+        }
+
+        .laurel .kind { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; }
+        .laurel .fest { font-family: "schwarzkopf-new", serif; font-size: 1.05rem; color: #f3e6c4; }
+        .laurel .count { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
+
+        .front-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+            padding-top: 2rem;
+        }
+
+        .intro { max-width: 440px; font-family: 'Inter', sans-serif; font-size: .92rem; color: #d6dcdf; }
+
+        .badges {
+            display: flex;
+            align-items: center;
+            gap: .9rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: .75rem;
+        }
+
+        .badges .pill { border: 1px solid #d6dcdf; border-radius: 4px; padding: .1rem .45rem; }
+        .badges .genre { font-family: "schwarzkopf-new", serif; font-size: 1.2rem; }
+
+        .title-block { text-align: right; }
+
+        .tags {
+            font-family: 'Inter', sans-serif;
+            font-size: .85rem;
+            color: #d6dcdf;
+            margin-bottom: .6rem;
+        }
+
+        .tags span + span::before { content: '•'; margin: 0 .6rem; color: var(--muted); }
+
+        .big {
+            font-family: "schwarzkopf-new", serif;
+            font-weight: 400;
+            font-size: clamp(2.8rem, 8vw, 7rem);
+            line-height: 1;
+            color: #fff;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, .6);
+        }
+
+        /* Sponsoren auf der Front page */
+        .partners {
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: .75rem;
+        }
+
+        .sound {
+            position: absolute;
+            right: 1.2rem;
+            bottom: 1.2rem;
+            z-index: 3;
+            font-family: 'Inter', sans-serif;
+            font-size: .8rem;
+            color: #fff;
+            background: rgba(0, 0, 0, .45);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: .45rem .9rem;
+            cursor: pointer;
+        }
+
+        .sound:hover { border-color: #fff; }
+
+        .partners .label { letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+        .partners .logos { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; }
+
+        .partners .logos { gap: 2rem; }
+
+        .partners .logos a {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
-            font-style: italic;
+            width: 110px;
+            height: 48px;
+            opacity: .75;
+            transition: opacity .3s, transform .3s;
         }
-        /* Footer Styles */
-        
+
+        .partners .logos a:hover { opacity: 1; transform: translateY(-2px); }
+        .partners .logos img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        .partners .support { display: flex; gap: .6rem; }
+
+        .btn {
+            display: inline-block;
+            padding: .5rem 1rem;
+            border: 1px solid #fff;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background .3s, color .3s;
+        }
+
+        .btn:hover { background: #fff; color: #000; }
+        .btn.solid { background: #fff; color: #000; }
+        .btn.solid:hover { background: transparent; color: #fff; }
+
+        /* ---------- Inhalt ---------- */
+        section.block {
+            max-width: 1000px;
+            margin: auto;
+            padding: 7rem 2rem 1rem;
+        }
+
+        .eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-size: .72rem;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: .6rem;
+        }
+
+        h2 {
+            font-family: "schwarzkopf-new", serif;
+            font-weight: 400;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        p { color: #c8d0d3; margin-bottom: 1rem; }
+
+        .video-wrap {
+            position: relative;
+            padding-bottom: 56.25%;
+            border: 1px solid var(--line);
+            overflow: hidden;
+        }
+
+        .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card { border: 1px solid var(--line); background: #0b1114; transition: border-color .3s; }
+        .card:hover { border-color: rgba(255, 255, 255, .4); }
+
+        .card img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(.35);
+            transition: filter .4s;
+        }
+
+        .card:hover img { filter: none; }
+        .card .body { padding: 1rem; }
+        .card h3 { font-family: "schwarzkopf-new", serif; font-weight: 400; font-size: 1.2rem; margin-bottom: .3rem; }
+        .card .role { font-family: 'Inter', sans-serif; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
+        .card p { font-size: .9rem; margin: 0; }
+
+        .team-list { list-style: none; margin-bottom: 2rem; }
+        .team-list li { padding: .6rem 0; border-bottom: 1px solid var(--line); color: #c8d0d3; }
+        .team-list strong { color: var(--ink); }
+
+        .moodboard img { width: 100%; border: 1px solid var(--line); display: block; }
+        .caption { font-style: italic; color: var(--muted); margin-top: .6rem; text-align: center; }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin: 2.5rem 0;
+        }
+
+        .row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+
+        .donate {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .donate a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .5rem;
+            padding: 1rem;
+            border: 1px solid var(--line);
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: .85rem;
+            transition: border-color .3s, transform .3s;
+        }
+
+        .donate a:hover { border-color: #fff; transform: translateY(-2px); }
+        .donate img { height: 90px; width: auto; border-radius: 4px; }
+
         footer {
             text-align: center;
-            padding: 2rem;
-            background-color: #111;
-            margin-top: 4rem;
-            color: #777;
+            padding: 3rem 2rem;
+            margin-top: 6rem;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-family: 'Inter', sans-serif;
+            font-size: .8rem;
         }
-        /* Keyframe Animations */
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        /* Team Gallery Styles */
-        
-        .team-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            justify-items: center;
-            /* Added padding-left for indentation */
-            padding-left: 1rem;
-        }
-        
-        .team-member {
-            text-align: center;
-            color: #e0e0e0;
-            max-width: 180px;
-        }
-        
-        .team-member img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin-bottom: 0.5rem;
-        }
-        
-        .team-member h3 {
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-            color: #f5f5f5;
-        }
-        
-        .team-member p {
-            font-size: 0.85rem;
-            color: #ccc;
-            line-height: 1.4;
-        }
-        /* Added padding-left for the unordered list in team section */
-        
-        .content ul {
-            list-style: disc;
-            /* Ensure disc style is visible */
-            margin-left: 1.5rem;
-            /* Indent the list */
-            margin-bottom: 1rem;
-            /* Space below the list */
-            padding-left: 0.5rem;
-            /* Align with heading's padding */
-        }
-        
-        .content ul li {
-            margin-bottom: 0.5rem;
-        }
-        /* Character Gallery Styles */
-        
-        .character-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            justify-items: center;
-        }
-        
-        .character-card {
-            text-align: center;
-            color: #e0e0e0;
-            max-width: 180px;
-        }
-        
-        .character-card img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin-bottom: 0.5rem;
-        }
-        
-        .character-card h3 {
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-            color: #f5f5f5;
-        }
-        
-        .character-card p {
-            font-size: 0.85rem;
-            color: #ccc;
-            line-height: 1.4;
-        }
-        /* Image Hover Effects */
-        
-        .team-member img,
-        .character-card img {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .team-member img:hover,
-        .character-card img:hover {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-        }
-        /* Moodboard Styles */
-        
-        .moodboard-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 2rem;
-        }
-        
-        .moodboard-wrapper img {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            border: 2px solid #333;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            cursor: zoom-in;
-        }
-        
-        .moodboard-wrapper img:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-        }
-        /* Styles for Original Sage Section */
-        
-        .original-sage {
-            padding: 6rem 2rem 2rem;
-            max-width: 800px;
-            margin: auto;
-            animation: fadeInUp 1s ease both;
-        }
-        
-        .original-sage h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid #b8a6a4;
-            padding-left: 0.5rem;
-        }
-        
-        .original-sage p {
-            margin-bottom: 1rem;
-            color: #ccc;
-        }
-        
-        .original-sage .sage-image {
-            display: block;
-            margin: 2rem auto;
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .original-sage .quote {
-            font-style: italic;
-            text-align: center;
-            margin: 2rem 0;
-            font-size: 1.1rem;
-            color: #b8a6a4;
-        }
-        /* Sidebar Styles */
-        
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 180px;
-            /* Width of the sidebar */
-            height: 100%;
-            background-color: #1a1a1a;
-            border-left: 1px solid #333;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            overflow-y: auto;
-            /* Enable scrolling for many logos */
-            z-index: 1100;
-            /* Higher than header */
-        }
-        
-        .sidebar h3 {
-            font-family: "schwarzkopf-new", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 1.2rem;
-            color: #f5f5f5;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-        
-        .sidebar a {
-            display: block;
-            /* Make links block-level for easier clicking */
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        .sidebar .support-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-        }
-        
-        .sidebar .gofundme-link,
-        .sidebar .paypal-link {
-            display: flex;
-            /* Use flex for image inside link */
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-            border: 2px solid transparent;
-            /* Initial transparent border */
-        }
-        
-        .sidebar .gofundme-link:hover,
-        .sidebar .paypal-link:hover,
-        .sidebar .gofundme-link:active,
-        /* Add active state for click effect */
-        
-        .sidebar .paypal-link:active {
-            background-color: #c74530;
-            /* Reddish on hover/active */
-            transform: translateY(-2px);
-            border-color: #e04e39;
-            /* Red border on hover/active */
-        }
-        
-        .sidebar .gofundme-link p,
-        .sidebar .paypal-link p {
-            color: #fff;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-top: 5px;
-            /* Space between image and text */
-        }
-        
-        .sidebar .gofundme-img,
-        .sidebar .paypal-img {
-            max-width: 100px;
-            /* Adjusted size for images in sidebar */
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .sidebar .gofundme-img:hover,
-        .sidebar .paypal-img:hover {
-            transform: scale(1.05);
-        }
-        /* --- GEÄNDERT: Styles für Unterstützer-Logos --- */
-        
-        .sidebar .supporter-logo-link {
-            display: flex;
-            /* Flexbox für Zentrierung des Bildes */
-            justify-content: center;
-            /* Zentriert horizontal */
-            align-items: center;
-            /* Zentriert vertikal */
-            width: 100%;
-            padding: 5px;
-            border-radius: 5px;
-            background-color: transparent;
-            /* Standardmäßig transparent */
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            border: 2px solid transparent;
-            /* Initial transparent border */
-            height: 80px;
-            /* Einheitliche Höhe für den Link-Container */
-        }
-        
-        .sidebar .supporter-logo-link:hover,
-        .sidebar .supporter-logo-link:active {
-            background-color: #28a745;
-            /* Grün beim Hover */
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            border-color: #218838;
-            /* Grüner Rand beim Hover */
-        }
-        
-        .sidebar .supporter-logo-link img {
-            width: auto;
-            /* Breite automatisch anpassen */
-            height: 70px;
-            /* Einheitliche Höhe für die Bilder */
-            max-width: 100%;
-            /* Sicherstellen, dass das Bild nicht überläuft */
-            object-fit: contain;
-            /* Bild in den Container einpassen, ohne es zu beschneiden */
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        /* --- ENDE GEÄNDERT --- */
-        /* Video Module Styles */
-        
-        .video-module {
-            padding: 6rem 2rem 2rem;
-            max-width: 800px;
-            margin: auto;
-            text-align: center;
-            animation: fadeInUp 1s ease both;
-        }
-        
-        .video-module h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid #b8a6a4;
-            padding-left: 0.5rem;
-            text-align: left;
-            /* Align title to left */
-        }
-        
-        .video-placeholder {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            /* 16:9 Aspect Ratio */
-            background-color: #222;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-style: italic;
-            font-size: 1.2rem;
-        }
-        
-        .video-placeholder iframe,
-        .video-placeholder video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        /* Media Queries for Responsiveness */
-        
-        @media (max-width: 992px) {
-            /* Adjust breakpoint for sidebar */
-            body {
-                padding-right: 0;
-                /* Remove padding for smaller screens */
-            }
-            header {
-                width: 100%;
-                /* Full width header */
-            }
-            .sidebar {
-                position: relative;
-                /* Make sidebar flow with content */
-                width: 100%;
-                /* Full width */
-                height: auto;
-                border-left: none;
-                border-top: 1px solid #333;
-                padding-top: 2rem;
-                order: 1;
-                /* Place it after the main content */
-                flex-direction: row;
-                /* Arrange items horizontally */
-                flex-wrap: wrap;
-                /* Allow wrapping */
-                justify-content: center;
-            }
-            .sidebar h3 {
-                width: 100%;
-                /* Occupy full width */
-                margin-bottom: 1rem;
-            }
-            .sidebar .support-links {
-                flex-direction: row;
-                /* Keep buttons side-by-side */
-                justify-content: center;
-                gap: 15px;
-            }
-            .sidebar .gofundme-link,
-            .sidebar .paypal-link {
-                width: auto;
-                /* Allow items to shrink on smaller screens */
-                flex-basis: 45%;
-                /* Approx half width for two columns */
-                max-width: 150px;
-                /* Limit individual item width */
-            }
-            .sidebar .gofundme-link p,
-            .sidebar .paypal-link p {
-                font-size: 0.8rem;
-            }
-            .sidebar .gofundme-img,
-            .sidebar .paypal-img {
-                max-width: 80px;
-                /* Smaller images on smaller screens */
-            }
-            .sidebar .supporter-logo-link img {
-                height: 60px;
-                /* Slightly smaller on mobile */
-            }
-        }
-        
-        @media (max-width: 768px) {
-            /* Responsive Styles for Header & Nav */
-            header {
-                padding: 1rem;
-            }
-            nav {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            nav h1 {
-                margin: 0;
-            }
-            nav ul {
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background-color: #121212;
-                width: 100%;
-                padding: 1rem 2rem;
-                max-height: 0;
-                opacity: 0;
-                overflow: hidden;
-                border-top: 1px solid #333;
-                align-items: flex-start;
-                gap: 1rem;
-                z-index: 999;
-            }
-            nav ul.active {
-                max-height: 500px;
-                opacity: 1;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .hero-text .main-title {
-                font-size: 3rem;
-            }
-            .hero-text .subtitle {
-                font-size: 1.8rem;
-            }
-            /* Responsive Styles for Footer Carousel */
-            .sidebar .supporter-logos {
-                display: flex;
-                overflow-x: scroll;
-                -webkit-overflow-scrolling: touch;
-                /* for smooth scrolling on iOS */
-                scroll-snap-type: x mandatory;
-                gap: 1rem;
-                padding: 1rem 0;
-                width: 100%;
-                justify-content: flex-start;
-            }
-            .sidebar .supporter-logo-link {
-                flex-shrink: 0;
-                width: 100px;
-                height: auto;
-                scroll-snap-align: start;
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: none; } }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+            .front { padding: 16px; }
+            .frame { padding: 1.2rem; min-height: calc(100vh - 32px); }
+            .topbar { grid-template-columns: 1fr auto; }
+            .brand { text-align: left; font-size: 1.4rem; }
+            .menu-toggle { display: block; }
+            .topbar ul { display: none; }
+            .topbar.open ul {
                 display: flex;
                 flex-direction: column;
-                align-items: center;
-                padding: 5px;
+                gap: .8rem;
+                grid-column: 1 / -1;
+                padding-top: 1rem;
             }
-            .sidebar .supporter-logo-link img {
-                height: 50px;
-            }
+            .topbar.open ul.right { justify-content: flex-start; }
+            .front-mid { flex-direction: column; }
+            .awards { justify-content: flex-start; }
+            .front-bottom { flex-direction: column-reverse; align-items: flex-start; }
+            .title-block { text-align: left; }
+            .partners { flex-direction: column; align-items: flex-start; }
         }
-        
-        @media (max-width: 480px) {
-            .hero-text .main-title {
-                font-size: 2.5rem;
-            }
-            .hero-text .subtitle {
-                font-size: 1.5rem;
-            }
-            nav h1 {
-                font-size: 1.2rem;
-            }
-            nav ul {
-                gap: 0.5rem;
-            }
-            nav a {
-                font-size: 0.9rem;
-            }
-            .sidebar .gofundme-link,
-            .sidebar .paypal-link {
-                flex-basis: 90%;
-                /* Single column layout on very small screens */
-                max-width: 200px;
-            }
+
+        @media (prefers-reduced-motion: reduce) {
+            .frame { animation: none; }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <h1>Der Schimmelreiter</h1>
-            <button class="menu-toggle" aria-expanded="false" aria-controls="main-navigation">
-                &#9776;
-            </button>
-            <ul id="main-navigation">
-                <li><a href="#start">Start</a></li>
-                <li><a href="#charaktere">Charaktere</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#original-sage">Originalsage</a></li>
-                <li><a href="#projektmappe" class="rider-link"><span class="rider-icon">🐎</span> Projektmappe</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="start" class="hero">
-        <div class="hero-text">
-            <h2 class="main-title">Der Schimmelreiter</h2>
-            <h2 class="subtitle">Eine Sage aus dem Hochschwarzwald</h2>
-            <p>Ein tyrannischer Vogt, ein verschlepptes Bauernmädchen. Und ein Fluch, der im Nebel erwacht.</p>
-            <br>
+    <section id="start" class="front">
+        <video autoplay muted loop playsinline preload="auto" poster="Schimmelreiter/Assets/teaser_poster.jpg">
+            <source src="Schimmelreiter/Assets/teaser.mp4" type="video/mp4">
+        </video>
+        <button class="sound" aria-pressed="false">🔇 Ton an</button>
+
+        <div class="frame">
+            <nav class="topbar">
+                <ul>
+                    <li><a href="#trailer">Trailer</a></li>
+                    <li><a href="#charaktere">Charaktere</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                </ul>
+                <div class="brand">Der Schimmelreiter</div>
+                <button class="menu-toggle" aria-expanded="false" aria-label="Menü">&#9776;</button>
+                <ul class="right">
+                    <li><a href="#original-sage">Originalsage</a></li>
+                    <li><a href="#projektmappe">🐎 Projektmappe</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+
+            <div class="front-mid">
+                <div></div>
+
+                <div class="awards" aria-label="Auszeichnungen">
+                    <div class="laurel">
+                        <svg viewBox="0 0 34 78" fill="currentColor" aria-hidden="true"><path d="M28 76C12 66 4 50 5 30 6 20 9 10 14 2l1.5.8C11 11 8.5 20 8 30c-.8 19 6.5 34 21 44z"/><ellipse cx="5" cy="58" rx="3" ry="7" transform="rotate(-40 5 58)"/><ellipse cx="3" cy="45" rx="3" ry="7" transform="rotate(-20 3 45)"/><ellipse cx="3" cy="32" rx="3" ry="7" transform="rotate(-5 3 32)"/><ellipse cx="5" cy="19" rx="3" ry="7" transform="rotate(10 5 19)"/><ellipse cx="10" cy="8" rx="2.6" ry="6" transform="rotate(25 10 8)"/><ellipse cx="15" cy="62" rx="3" ry="7" transform="rotate(50 15 62)"/><ellipse cx="13" cy="48" rx="3" ry="7" transform="rotate(35 13 48)"/><ellipse cx="13" cy="34" rx="3" ry="7" transform="rotate(25 13 34)"/><ellipse cx="15" cy="21" rx="2.6" ry="6" transform="rotate(30 15 21)"/></svg>
+                        <div class="txt">
+                            <div class="kind">Gewinner</div>
+                            <div class="fest">Berlin Film Fest</div>
+                            <div class="count">1 Award</div>
+                        </div>
+                        <svg class="r" viewBox="0 0 34 78" fill="currentColor" aria-hidden="true"><path d="M28 76C12 66 4 50 5 30 6 20 9 10 14 2l1.5.8C11 11 8.5 20 8 30c-.8 19 6.5 34 21 44z"/><ellipse cx="5" cy="58" rx="3" ry="7" transform="rotate(-40 5 58)"/><ellipse cx="3" cy="45" rx="3" ry="7" transform="rotate(-20 3 45)"/><ellipse cx="3" cy="32" rx="3" ry="7" transform="rotate(-5 3 32)"/><ellipse cx="5" cy="19" rx="3" ry="7" transform="rotate(10 5 19)"/><ellipse cx="10" cy="8" rx="2.6" ry="6" transform="rotate(25 10 8)"/><ellipse cx="15" cy="62" rx="3" ry="7" transform="rotate(50 15 62)"/><ellipse cx="13" cy="48" rx="3" ry="7" transform="rotate(35 13 48)"/><ellipse cx="13" cy="34" rx="3" ry="7" transform="rotate(25 13 34)"/><ellipse cx="15" cy="21" rx="2.6" ry="6" transform="rotate(30 15 21)"/></svg>
+                    </div>
+                    <div class="laurel">
+                        <svg viewBox="0 0 34 78" fill="currentColor" aria-hidden="true"><path d="M28 76C12 66 4 50 5 30 6 20 9 10 14 2l1.5.8C11 11 8.5 20 8 30c-.8 19 6.5 34 21 44z"/><ellipse cx="5" cy="58" rx="3" ry="7" transform="rotate(-40 5 58)"/><ellipse cx="3" cy="45" rx="3" ry="7" transform="rotate(-20 3 45)"/><ellipse cx="3" cy="32" rx="3" ry="7" transform="rotate(-5 3 32)"/><ellipse cx="5" cy="19" rx="3" ry="7" transform="rotate(10 5 19)"/><ellipse cx="10" cy="8" rx="2.6" ry="6" transform="rotate(25 10 8)"/><ellipse cx="15" cy="62" rx="3" ry="7" transform="rotate(50 15 62)"/><ellipse cx="13" cy="48" rx="3" ry="7" transform="rotate(35 13 48)"/><ellipse cx="13" cy="34" rx="3" ry="7" transform="rotate(25 13 34)"/><ellipse cx="15" cy="21" rx="2.6" ry="6" transform="rotate(30 15 21)"/></svg>
+                        <div class="txt">
+                            <div class="kind">Gewinner</div>
+                            <div class="fest">Milan Film Fest</div>
+                            <div class="count">3 Awards</div>
+                        </div>
+                        <svg class="r" viewBox="0 0 34 78" fill="currentColor" aria-hidden="true"><path d="M28 76C12 66 4 50 5 30 6 20 9 10 14 2l1.5.8C11 11 8.5 20 8 30c-.8 19 6.5 34 21 44z"/><ellipse cx="5" cy="58" rx="3" ry="7" transform="rotate(-40 5 58)"/><ellipse cx="3" cy="45" rx="3" ry="7" transform="rotate(-20 3 45)"/><ellipse cx="3" cy="32" rx="3" ry="7" transform="rotate(-5 3 32)"/><ellipse cx="5" cy="19" rx="3" ry="7" transform="rotate(10 5 19)"/><ellipse cx="10" cy="8" rx="2.6" ry="6" transform="rotate(25 10 8)"/><ellipse cx="15" cy="62" rx="3" ry="7" transform="rotate(50 15 62)"/><ellipse cx="13" cy="48" rx="3" ry="7" transform="rotate(35 13 48)"/><ellipse cx="13" cy="34" rx="3" ry="7" transform="rotate(25 13 34)"/><ellipse cx="15" cy="21" rx="2.6" ry="6" transform="rotate(30 15 21)"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="front-bottom">
+                <div>
+                    <div class="badges">
+                        <span class="genre">Kurzfilm</span>
+                        <span class="pill">16+</span>
+                        <span>Hochschwarzwald</span>
+                    </div>
+                    <p class="intro">Ein tyrannischer Vogt, ein verschlepptes Bauernmädchen. Und ein Fluch, der im Nebel erwacht. — Eine Sage aus dem Hochschwarzwald.</p>
+                </div>
+                <div class="title-block">
+                    <div class="tags"><span>Sage</span><span>Mystery</span><span>Horror</span></div>
+                    <h1 class="big">Der<br>Schimmelreiter</h1>
+                </div>
+            </div>
+
+            <div class="partners">
+                <span class="label">Support &amp; Partner</span>
+                <div class="logos">
+                    <a href="https://www.furtwangen.de/startseite" target="_blank" rel="noopener noreferrer"><img src="Schimmelreiter/Assets/logo_furtwangen.png" alt="Stadt Furtwangen"></a>
+                    <a href="https://www.voehrenbach.de/startseite" target="_blank" rel="noopener noreferrer"><img src="Schimmelreiter/Assets/logo_voehrenbach.png" alt="Stadt Vöhrenbach"></a>
+                    <a href="https://www.campus-galli.de/" target="_blank" rel="noopener noreferrer"><img src="Schimmelreiter/Assets/logo_campusgalli.png" alt="Campus Galli"></a>
+                </div>
+                <div class="support">
+                    <a class="btn solid" href="https://www.gofundme.com/f/kurzfilm-schwarzwaldsage-der-schimmelreiter" target="_blank" rel="noopener noreferrer">Jetzt unterstützen</a>
+                    <a class="btn" href="https://www.paypal.com/qrcodes/managed/d93e012f-92b5-463d-ad9f-21aa31673c8d?utm_source=consweb_more" target="_blank" rel="noopener noreferrer">PayPal</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="video" class="video-module">
-        <h2>Trailer / Teaser</h2>
-        <div class="video-placeholder">
-            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nItFJ1XayBE?si=BaHxPPI5ikkBvWTd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="horse">
+    <section id="trailer" class="block">
+        <div class="eyebrow">Trailer / Teaser</div>
+        <h2>Der Fluch erwacht</h2>
+        <div class="video-wrap">
+            <iframe src="https://www.youtube-nocookie.com/embed/nItFJ1XayBE?si=BaHxPPI5ikkBvWTd" title="Der Schimmelreiter – Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </section>
 
-    <section id="charaktere" class="content">
+    <section id="charaktere" class="block">
+        <div class="eyebrow">Die Figuren</div>
         <h2>Charaktere</h2>
-        <div class="character-gallery">
-            <div class="character-card">
-                <img src="Schimmelreiter/Assets/KATA.jpg" alt="Katharina" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Katharina';">
-                <h3>Katharina</h3>
-                <p>22 Jahre alt, gläubig, leidet unter Verantwortung für ihre Familie. Wird vom Vogt verschleppt.</p>
+        <div class="cards">
+            <div class="card">
+                <img src="Schimmelreiter/Assets/KATA.jpg" alt="Katharina">
+                <div class="body"><h3>Katharina</h3><p>22 Jahre alt, gläubig, leidet unter Verantwortung für ihre Familie. Wird vom Vogt verschleppt.</p></div>
             </div>
-            <div class="character-card">
-                <img src="Schimmelreiter/Assets/VOGT.jpg" alt="Der Vogt (Johann)" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Vogt';">
-                <h3>Der Vogt (Johann)</h3>
-                <p>37 Jahre alt, machtbesessen und gnadenlos. Verkörpert Herrschaft über Leben und Tod.</p>
+            <div class="card">
+                <img src="Schimmelreiter/Assets/VOGT.jpg" alt="Der Vogt (Johann)">
+                <div class="body"><h3>Der Vogt (Johann)</h3><p>37 Jahre alt, machtbesessen und gnadenlos. Verkörpert Herrschaft über Leben und Tod.</p></div>
             </div>
-            <div class="character-card">
-                <img src="Schimmelreiter/Assets/JAKOB.jpg" alt="Jakob" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Jakob';">
-                <h3>Jakob</h3>
-                <p>20 Jahre, verzweifelter Bruder von Katharina. Vom Wunsch nach Rache getrieben.</p>
+            <div class="card">
+                <img src="Schimmelreiter/Assets/JAKOB.jpg" alt="Jakob">
+                <div class="body"><h3>Jakob</h3><p>20 Jahre, verzweifelter Bruder von Katharina. Vom Wunsch nach Rache getrieben.</p></div>
             </div>
-            <div class="character-card">
-                <img src="Schimmelreiter/Assets/PETER.jpg" alt="Peter" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Peter';">
-                <h3>Peter</h3>
-                <p>4 Jahre alt, Katharinas kleiner Bruder. Symbol der Unschuld inmitten der Dunkelheit.</p>
+            <div class="card">
+                <img src="Schimmelreiter/Assets/PETER.jpg" alt="Peter">
+                <div class="body"><h3>Peter</h3><p>4 Jahre alt, Katharinas kleiner Bruder. Symbol der Unschuld inmitten der Dunkelheit.</p></div>
             </div>
         </div>
     </section>
 
-    <section id="team" class="content">
-        <h2>Unser Team</h2>
-        <ul>
-            <li><strong>Kurt Richard Pätzold</strong> – Kamera und Regie. Hat Erfahrung in Deutschland und Italien gesammelt.
-            </li>
-            <li><strong>Sami Bouguila</strong> – Ton und Musik. Schauspieler, Moderator und Sounddesigner mit Leidenschaft für Filmmusik.</li>
-            <li><strong>Amin Lakhal</strong> – Drehbuch und Produktionsassistenz. Visuell und erzählerisch begabt.
-            </li>
-            <li><strong>Amelie Boehm</strong> – Regie, Drehbuch und Kostüm. Sprachlich kreativ mit journalistischer Erfahrung.
-            </li>
-        </ul>
-        <div class="team-gallery">
-            <div class="team-member">
-                <img src="Schimmelreiter/Assets/KURT.jpg" alt="Kurt Richard Pätzold" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Kurt';">
-                <h3>Kurt Richard Pätzold</h3>
-                <p>Kamera & Regie<br>Erfahrung in Deutschland & Italien</p>
-            </div>
-            <div class="team-member">
-                <img src="Schimmelreiter/Assets/SAMI.jpg" alt="Sami Bouguila" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Sami';">
-                <h3>Sami Bouguila</h3>
-                <p>Ton & Musik<br>Erfahrung in Moderation & Sounddesign</p>
-            </div>
-            <div class="team-member">
-                <img src="Schimmelreiter/Assets/AMIN.jpg" alt="Amin Lakhal" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Amin';">
-                <h3>Amin Lakhal</h3>
-                <p>Drehbuch & Assistenz<br>Visuell und erzählerisch stark</p>
-            </div>
-            <div class="team-member">
-                <img src="Schimmelreiter/Assets/AME.jpg" alt="Amelie Boehm" onerror="this.onerror=null;this.src='https://placehold.co/150x150/222/666?text=Amelie';">
-                <h3>Amelie Boehm</h3>
-                <p>Regie, Kostüm & Drehbuch<br>Sprachlich kreativ mit Erfahrung</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="galerie" class="gallery">
-        <h2>Galerie</h2>
-        <div class="moodboard-wrapper">
-            <img src="Schimmelreiter/Assets/MOODBOARD.jpg" alt="Moodboard" onerror="this.onerror=null;this.src='https://placehold.co/800x450/222/666?text=Moodboard';">
-            <p class="caption">Moodboard – Visuelle Inspiration für Stimmung, Farben & Stil</p>
-        </div>
-    </section>
-
-    <section id="original-sage" class="original-sage">
-        <h2>Die Originalsage</h2>
-        <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. <br>Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. <br> Als sie dem kopflosen Reiter begegnet, beginnt
-            ein düsteres Spiel zwischen Macht, Schuld und Rache.</p>
-        <p class="quote">"Wer den Wald mit Blut tränkt, wird ewig in ihm reiten."</p>
-        <p>Die Originalsage "Der Schimmelreiter von Hammereisenbach" erzählt von einem verhassten Vogt der Burg Neufürstenberg, der die Bauern zu Frondiensten zwang und Materiallieferungen einforderte. Im 16. Jahrhundert spitzte sich die Lage zu, und die
-            Bauern lehnten sich gegen den Tyrannen auf, indem sie ihm bei der Jagd auflauerten.</p>
-        <p>Der Vogt, der die Gefahr witterte, ließ die Hufeisen seines Pferdes verkehrt herum aufschlagen, um die Bauern auf eine falsche Fährte zu locken. Doch die Bauern durchschauten seine Intrige, was ihre Wut nur noch mehr schürte. Als der Vogt erkannte,
-            dass er nicht mehr sicher war, beschloss er, verkleidet als einfacher Knecht, nach Freiburg zu fliehen und ritt in Richtung Urach.</p>
-        <p>Doch die Bauern lauerten ihm in der ganzen Umgebung auf, überwältigten ihn, rissen ihn von seinem Schimmel und schlugen ihm den Kopf ab. Seit jeher soll der Vogt auf seinem Schimmel umhergeistern und seinen Kopf auf einem Silbertablett unter dem
-            Arm tragen, wodurch seine Schreckensherrschaft ewig fortwährt.</p>
-        <p>Unsere Verfilmung stellt die Frage: Was, wenn der Vogt den Bauern außer Abgaben noch etwas anderes genommen hat? Wenn seine Schreckensherrschaft noch viel tiefer reicht und dunkle Mächte ihre Finger im Spiel haben?
-        </p>
-    </section>
-
-    <section id="projektmappe" class="content">
-        <h2>Projektmappe</h2>
-        <p>Hier können Sie die vollständige Projektmappe als PDF herunterladen, um mehr über unser Filmprojekt zu erfahren.</p>
-        <p><a href="https://raw.githubusercontent.com/AminLakhal/Schimmelreiter/main/Schimmelreiter/Assets/Projektmappe%20-%20Der%20Schimmelreiter%20Eine%20Sage%20aus%20dem%20Schwarzwald.pdf" target="_blank" download style="color: #b8a6a4; text-decoration: underline;">Projektmappe herunterladen (PDF)</a></p>
-        <p>
-            <small>Hinweis: Dies ist ein Platzhalter-Link. Bitte ersetzen Sie 'path/to/your/projektmappe.pdf' durch den tatsächlichen Pfad zu Ihrer PDF-Datei.</small>
-        </p>
-    </section>
-
-    <section id="kontakt" class="content">
-        <h2>Kontakt</h2>
-        <p>Sie möchten uns unterstützen oder mehr erfahren?<br> Schreiben Sie uns gerne unter:<br>
-            <a href="mailto:kurzfilm.schimmelreiter@web.de">kurzfilm.schimmelreiter@web.de</a></p>
-    </section>
-
-    <footer>
-        <p>© 2025 Der Schimmelreiter – Ein Kurzfilmprojekt aus dem Hochschwarzwald</p>
-    </footer>
-
-    <div class="sidebar">
-        <h3>Support & Partner</h3>
-        <div class="support-links">
-            <a href="https://www.gofundme.com/f/kurzfilm-schwarzwaldsage-der-schimmelreiter" target="_blank" rel="noopener noreferrer" class="gofundme-link">
-                <img src="Schimmelreiter/Assets/gofundme-logo-png_seeklogo-447152.png" alt="GoFundMe Bild" class="gofundme-img" onerror="this.onerror=null;this.src='https://placehold.co/100x60/222/666?text=GoFundMe+Bild';">
-                <p>Jetzt unterstützen!</p>
-            </a>
-            <a href="https://www.paypal.com/qrcodes/managed/d93e012f-92b5-463d-ad9f-21aa31673c8d?utm_source=consweb_more" target="_blank" rel="noopener noreferrer" class="paypal-link">
-                <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="PayPal QR Code" class="paypal-img" onerror="this.onerror=null;this.src='https://placehold.co/100x100/222/666?text=PayPal+QR';">
-                <p>Per PayPal spenden</p>
-            </a>
-        </div>
-        <div class="supporter-logos">
-            <a href="https://www.furtwangen.de/startseite" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
-                <img src="Schimmelreiter/Assets/furtwangen logo.jpg" alt="Stadt Furtwangen" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter+1';">
-            </a>
-            <a href="https://www.voehrenbach.de/startseite" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
-                <img src="Schimmelreiter/Assets/2412200721_logo.jpg" alt="Stadt Vöhrenbach" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter+2';">
-            </a>
-            <a href="https://www.campus-galli.de/" target="_blank" rel="noopener noreferrer" class="supporter-logo-link">
-                <img src="Schimmelreiter/Assets/Campus galli Logo.jpeg" alt="Campus Galli" onerror="this.onerror=null;this.src='https://placehold.co/100x60/333/ccc?text=Supporter+3';">
-            </a>
-        </div>
     </div>
 
-    <script>
-        // Smooth scrolling for navigation links
-        const navLinks = document.querySelectorAll('nav a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+    <section id="team" class="block">
+        <div class="eyebrow">Hinter der Kamera</div>
+        <h2>Unser Team</h2>
+        <ul class="team-list">
+            <li><strong>Kurt Richard Pätzold</strong> – Kamera und Regie. Hat Erfahrung in Deutschland und Italien gesammelt.</li>
+            <li><strong>Sami Bouguila</strong> – Ton und Musik. Schauspieler, Moderator und Sounddesigner mit Leidenschaft für Filmmusik.</li>
+            <li><strong>Amin Lakhal</strong> – Drehbuch und Produktionsassistenz. Visuell und erzählerisch begabt.</li>
+            <li><strong>Amelie Boehm</strong> – Regie, Drehbuch und Kostüm. Sprachlich kreativ mit journalistischer Erfahrung.</li>
+        </ul>
+        <div class="cards">
+            <div class="card">
+                <img src="Schimmelreiter/Assets/KURT.jpg" alt="Kurt Richard Pätzold">
+                <div class="body"><h3>Kurt Richard Pätzold</h3><div class="role">Kamera &amp; Regie</div><p>Erfahrung in Deutschland &amp; Italien</p></div>
+            </div>
+            <div class="card">
+                <img src="Schimmelreiter/Assets/SAMI.jpg" alt="Sami Bouguila">
+                <div class="body"><h3>Sami Bouguila</h3><div class="role">Ton &amp; Musik</div><p>Erfahrung in Moderation &amp; Sounddesign</p></div>
+            </div>
+            <div class="card">
+                <img src="Schimmelreiter/Assets/AMIN.jpg" alt="Amin Lakhal">
+                <div class="body"><h3>Amin Lakhal</h3><div class="role">Drehbuch &amp; Assistenz</div><p>Visuell und erzählerisch stark</p></div>
+            </div>
+            <div class="card">
+                <img src="Schimmelreiter/Assets/AME.jpg" alt="Amelie Boehm">
+                <div class="body"><h3>Amelie Boehm</h3><div class="role">Regie, Kostüm &amp; Drehbuch</div><p>Sprachlich kreativ mit Erfahrung</p></div>
+            </div>
+        </div>
+    </section>
 
-        // Toggle mobile navigation menu
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navUl = document.querySelector('nav ul');
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', !isExpanded);
-            navUl.classList.toggle('active');
+    <section id="galerie" class="block moodboard">
+        <div class="eyebrow">Galerie</div>
+        <h2>Moodboard</h2>
+        <img src="Schimmelreiter/Assets/MOODBOARD.jpg" alt="Moodboard">
+        <p class="caption">Moodboard – Visuelle Inspiration für Stimmung, Farben &amp; Stil</p>
+    </section>
+
+    <section id="original-sage" class="block">
+        <div class="eyebrow">Die Legende</div>
+        <h2>Die Originalsage</h2>
+        <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. Als sie dem kopflosen Reiter begegnet, beginnt ein düsteres Spiel zwischen Macht, Schuld und Rache.</p>
+        <p class="quote">"Wer den Wald mit Blut tränkt, wird ewig in ihm reiten."</p>
+        <p>Die Originalsage "Der Schimmelreiter von Hammereisenbach" erzählt von einem verhassten Vogt der Burg Neufürstenberg, der die Bauern zu Frondiensten zwang und Materiallieferungen einforderte. Im 16. Jahrhundert spitzte sich die Lage zu, und die Bauern lehnten sich gegen den Tyrannen auf, indem sie ihm bei der Jagd auflauerten.</p>
+        <p>Der Vogt, der die Gefahr witterte, ließ die Hufeisen seines Pferdes verkehrt herum aufschlagen, um die Bauern auf eine falsche Fährte zu locken. Doch die Bauern durchschauten seine Intrige, was ihre Wut nur noch mehr schürte. Als der Vogt erkannte, dass er nicht mehr sicher war, beschloss er, verkleidet als einfacher Knecht, nach Freiburg zu fliehen und ritt in Richtung Urach.</p>
+        <p>Doch die Bauern lauerten ihm in der ganzen Umgebung auf, überwältigten ihn, rissen ihn von seinem Schimmel und schlugen ihm den Kopf ab. Seit jeher soll der Vogt auf seinem Schimmel umhergeistern und seinen Kopf auf einem Silbertablett unter dem Arm tragen, wodurch seine Schreckensherrschaft ewig fortwährt.</p>
+        <p>Unsere Verfilmung stellt die Frage: Was, wenn der Vogt den Bauern außer Abgaben noch etwas anderes genommen hat? Wenn seine Schreckensherrschaft noch viel tiefer reicht und dunkle Mächte ihre Finger im Spiel haben?</p>
+    </section>
+
+    <section id="projektmappe" class="block">
+        <div class="eyebrow">Download</div>
+        <h2>Projektmappe</h2>
+        <p>Hier können Sie die vollständige Projektmappe als PDF herunterladen, um mehr über unser Filmprojekt zu erfahren.</p>
+        <div class="row">
+            <a class="btn" href="https://raw.githubusercontent.com/AminLakhal/Schimmelreiter/main/Schimmelreiter/Assets/Projektmappe%20-%20Der%20Schimmelreiter%20Eine%20Sage%20aus%20dem%20Schwarzwald.pdf" target="_blank" download>Projektmappe herunterladen (PDF)</a>
+        </div>
+    </section>
+
+    <section id="kontakt" class="block">
+        <div class="eyebrow">Kontakt &amp; Support</div>
+        <h2>Unterstützen Sie uns</h2>
+        <p>Sie möchten uns unterstützen oder mehr erfahren? Schreiben Sie uns gerne unter:<br>
+            <a href="mailto:kurzfilm.schimmelreiter@web.de">kurzfilm.schimmelreiter@web.de</a></p>
+        <div class="donate">
+            <a href="https://www.gofundme.com/f/kurzfilm-schwarzwaldsage-der-schimmelreiter" target="_blank" rel="noopener noreferrer">
+                <img src="Schimmelreiter/Assets/gofundme-logo-png_seeklogo-447152.png" alt="GoFundMe">Jetzt unterstützen!
+            </a>
+            <a href="https://www.paypal.com/qrcodes/managed/d93e012f-92b5-463d-ad9f-21aa31673c8d?utm_source=consweb_more" target="_blank" rel="noopener noreferrer">
+                <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="PayPal QR Code">Per PayPal spenden
+            </a>
+        </div>
+    </section>
+
+    <footer>© 2025 Der Schimmelreiter – Ein Kurzfilmprojekt aus dem Hochschwarzwald</footer>
+
+    <script>
+        const topbar = document.querySelector('.topbar');
+        const toggle = document.querySelector('.menu-toggle');
+        toggle.addEventListener('click', () => {
+            const open = topbar.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', open);
         });
+        const video = document.querySelector('.front video');
+        const sound = document.querySelector('.sound');
+        video.muted = true;
+        video.play().catch(() => {});
+        sound.addEventListener('click', () => {
+            video.muted = !video.muted;
+            if (!video.muted) video.play();
+            sound.textContent = video.muted ? '🔇 Ton an' : '🔊 Ton aus';
+            sound.setAttribute('aria-pressed', !video.muted);
+        });
+        // Ton aus, sobald man die Front page verlässt
+        new IntersectionObserver(([e]) => {
+            if (!e.isIntersecting && !video.muted) sound.click();
+        }, { threshold: .2 }).observe(video);
+
+        topbar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => topbar.classList.remove('open')));
     </script>
 </body>
 
