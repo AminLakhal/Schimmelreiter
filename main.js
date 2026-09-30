@@ -150,7 +150,7 @@ if ('IntersectionObserver' in window) {
     }
 
     // Weicher Übergang zwischen den Seiten
-    document.querySelectorAll('a[href$=".html"]').forEach(a => {
+    document.querySelectorAll('a[href^="/"]').forEach(a => {
         a.addEventListener('click', e => {
             if (e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
             e.preventDefault();
