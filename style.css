@@ -529,3 +529,26 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
 }
 
 .block.center > .eyebrow, .block.center > h2 { text-align: center; }
+
+/* Awards: beim Drüberfahren oder Antippen die gewonnenen Preise zeigen */
+.laurel { position: relative; cursor: default; outline: none; }
+.laurel:hover, .laurel:focus-visible, .laurel.open { transform: translateY(-2px); filter: drop-shadow(0 0 12px rgba(216, 192, 138, .35)); }
+.award-pop {
+    position: absolute; top: calc(100% + 10px); left: 50%; z-index: 5;
+    min-width: 210px; padding: .9rem 1.1rem; text-align: left;
+    background: rgba(5, 8, 10, .94); border: 1px solid rgba(216, 192, 138, .45); border-radius: 6px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .55);
+    opacity: 0; visibility: hidden; transform: translate(-50%, -6px);
+    transition: opacity .3s var(--ease, ease), transform .3s var(--ease, ease), visibility .3s;
+}
+.award-pop::before { content: ''; position: absolute; top: -6px; left: 50%; width: 10px; height: 10px; background: inherit; border-left: inherit; border-top: inherit; transform: translateX(-50%) rotate(45deg); }
+.award-pop span { display: block; font-family: "schwarzkopf-new", serif; font-size: 1.05rem; color: #f3e6c4; margin-bottom: .4rem; }
+.award-pop ul { list-style: none; font-family: 'Inter', sans-serif; font-size: .82rem; color: var(--ink); }
+.award-pop li { padding: .25rem 0 .25rem 1.3rem; position: relative; }
+.award-pop li::before { content: '★'; position: absolute; left: 0; color: var(--gold); font-size: .75rem; top: .32rem; }
+.laurel:hover .award-pop, .laurel:focus-visible .award-pop, .laurel.open .award-pop { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+@media (max-width: 960px) {
+    .award-pop { left: 0; transform: translate(0, -6px); }
+    .award-pop::before { left: 2rem; }
+    .laurel:hover .award-pop, .laurel:focus-visible .award-pop, .laurel.open .award-pop { transform: translate(0, 0); }
+}

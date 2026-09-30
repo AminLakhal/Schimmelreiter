@@ -161,3 +161,11 @@ if ('IntersectionObserver' in window) {
     // Beim Zurück-Navigieren aus dem Cache wieder einblenden
     addEventListener('pageshow', e => { if (e.persisted) document.body.classList.remove('leaving'); });
 }
+
+// Awards auf Touch-Geräten per Antippen öffnen
+document.querySelectorAll('.laurel').forEach(l => l.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.laurel.open').forEach(o => o !== l && o.classList.remove('open'));
+    l.classList.toggle('open');
+}));
+document.addEventListener('click', () => document.querySelectorAll('.laurel.open').forEach(o => o.classList.remove('open')));
