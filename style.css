@@ -552,3 +552,16 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
     .award-pop::before { left: 2rem; }
     .laurel:hover .award-pop, .laurel:focus-visible .award-pop, .laurel.open .award-pop { transform: translate(0, 0); }
 }
+
+/* Cast */
+.cast-wrap { display: grid; grid-template-columns: minmax(200px, 280px) 1fr; gap: 1.5rem; align-items: start; }
+.cast-wrap .poster { aspect-ratio: 9/16; position: sticky; top: 90px; }
+.cast-wrap .cards { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.card.cast .monogram { aspect-ratio: 4/5; display: grid; place-items: center; font-family: "schwarzkopf-new", serif; font-size: 4rem; color: var(--gold); background: radial-gradient(circle at 50% 40%, #13222a, var(--panel) 70%); }
+.card .links { display: flex; flex-wrap: wrap; gap: .4rem .9rem; margin-top: .7rem; font-family: 'Inter', sans-serif; font-size: .78rem; }
+.card .links a { color: var(--gold); text-decoration: none; }
+.card .links a:hover { text-decoration: underline; }
+@media (max-width: 760px) {
+    .cast-wrap { grid-template-columns: 1fr; }
+    .cast-wrap .poster { position: static; max-width: 260px; margin: 0 auto; }
+}
