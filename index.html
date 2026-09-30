@@ -3,435 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Der Schimmelreiter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#05080a">
+    <meta name="description" content="Der Schimmelreiter – ein Kurzfilm nach einer Sage aus dem Hochschwarzwald. Gewinner beim Berlin Film Fest und Milan Film Fest.">
+    <title>Der Schimmelreiter – Eine Sage aus dem Hochschwarzwald</title>
     <link rel="stylesheet" href="https://use.typekit.net/aha5xvd.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #05080a;
-            --ink: #e8ecee;
-            --muted: #9aa6ab;
-            --accent: #b8a6a4;
-            --gold: #d8c08a;
-            --line: rgba(255, 255, 255, .14);
-            --glass: rgba(6, 12, 16, .45);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Spectral', serif;
-            background: var(--bg);
-            color: var(--ink);
-            line-height: 1.6;
-        }
-
-        a { color: inherit; }
-
-        /* ---------- Front page ---------- */
-        .front {
-            position: relative;
-            min-height: 100vh;
-            padding: 5vh 5vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: #0a1519;
-        }
-
-        /* Bereich unter der Front page: Pferd als Hintergrund, unten ausgeblendet */
-        .horse {
-            position: relative;
-            padding-bottom: 4rem;
-        }
-
-        .horse::before {
-            content: '';
-            position: absolute;
-            inset: 0 0 auto 0;
-            height: min(150vh, 1400px);
-            background:
-                linear-gradient(to bottom, var(--bg) 0%, rgba(5, 8, 10, 0) 15%, rgba(5, 8, 10, 0) 55%, var(--bg) 100%),
-                url("Schimmelreiter/Assets/schimmelreiter_blau.jpg") center top / cover no-repeat;
-            filter: brightness(1.5);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .horse > * { position: relative; z-index: 1; }
-
-        .front video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-        }
-
-        .front::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, .75) 100%),
-                linear-gradient(to bottom, rgba(0, 0, 0, .25), rgba(0, 0, 0, .55));
-            z-index: 1;
-        }
-
-        .frame {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 1280px;
-            min-height: 86vh;
-            display: grid;
-            grid-template-rows: auto 1fr auto auto;
-            padding: 2rem 2.5rem;
-            background: var(--glass);
-            border: 1px solid var(--line);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
-            animation: fadeIn 1.6s ease both;
-        }
-
-        .topbar {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-size: .85rem;
-        }
-
-        .topbar ul { list-style: none; display: flex; gap: 1.4rem; }
-        .topbar ul.right { justify-content: flex-end; }
-        .topbar a { text-decoration: none; color: #d6dcdf; transition: color .3s; }
-        .topbar a:hover { color: #fff; }
-
-        .brand {
-            font-family: "schwarzkopf-new", serif;
-            font-size: 1.8rem;
-            letter-spacing: .04em;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--ink);
-            font-size: 1.8rem;
-            cursor: pointer;
-            justify-self: end;
-        }
-
-        .front-mid {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding-top: 2.5rem;
-            gap: 2rem;
-        }
-
-        .watch {
-            width: 150px;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-            font-size: .85rem;
-        }
-
-        .watch .thumb {
-            width: 150px;
-            aspect-ratio: 16/10;
-            border: 1px solid var(--line);
-            border-radius: 6px;
-            background: url("Schimmelreiter/Assets/teaser_poster.jpg") center / cover;
-            margin-bottom: .6rem;
-            transition: transform .3s, border-color .3s;
-        }
-
-        .watch:hover .thumb { transform: translateY(-3px); border-color: #fff; }
-
-        /* Awards */
-        .awards {
-            display: flex;
-            gap: 1.6rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        .laurel {
-            display: flex;
-            align-items: center;
-            gap: .2rem;
-            color: var(--gold);
-            text-align: center;
-        }
-
-        .laurel svg { width: 34px; height: 78px; flex-shrink: 0; }
-        .laurel svg.r { transform: scaleX(-1); }
-
-        .laurel .txt {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.25;
-            min-width: 92px;
-        }
-
-        .laurel .kind { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; }
-        .laurel .fest { font-family: "schwarzkopf-new", serif; font-size: 1.05rem; color: #f3e6c4; }
-        .laurel .count { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
-
-        .front-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 2rem;
-            padding-top: 2rem;
-        }
-
-        .intro { max-width: 440px; font-family: 'Inter', sans-serif; font-size: .92rem; color: #d6dcdf; }
-
-        .badges {
-            display: flex;
-            align-items: center;
-            gap: .9rem;
-            margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-size: .75rem;
-        }
-
-        .badges .pill { border: 1px solid #d6dcdf; border-radius: 4px; padding: .1rem .45rem; }
-        .badges .genre { font-family: "schwarzkopf-new", serif; font-size: 1.2rem; }
-
-        .title-block { text-align: right; }
-
-        .tags {
-            font-family: 'Inter', sans-serif;
-            font-size: .85rem;
-            color: #d6dcdf;
-            margin-bottom: .6rem;
-        }
-
-        .tags span + span::before { content: '•'; margin: 0 .6rem; color: var(--muted); }
-
-        .big {
-            font-family: "schwarzkopf-new", serif;
-            font-weight: 400;
-            font-size: clamp(2.8rem, 8vw, 7rem);
-            line-height: 1;
-            color: #fff;
-            text-shadow: 0 4px 30px rgba(0, 0, 0, .6);
-        }
-
-        /* Sponsoren auf der Front page */
-        .partners {
-            margin-top: 2rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid var(--line);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-size: .75rem;
-        }
-
-        .sound {
-            position: absolute;
-            right: 1.2rem;
-            bottom: 1.2rem;
-            z-index: 3;
-            font-family: 'Inter', sans-serif;
-            font-size: .8rem;
-            color: #fff;
-            background: rgba(0, 0, 0, .45);
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            padding: .45rem .9rem;
-            cursor: pointer;
-        }
-
-        .sound:hover { border-color: #fff; }
-
-        .partners .label { letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
-        .partners .logos { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; }
-
-        .partners .logos { gap: 2rem; }
-
-        .partners .logos a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 110px;
-            height: 48px;
-            opacity: .75;
-            transition: opacity .3s, transform .3s;
-        }
-
-        .partners .logos a:hover { opacity: 1; transform: translateY(-2px); }
-        .partners .logos img { max-width: 100%; max-height: 100%; object-fit: contain; }
-
-        .partners .support { display: flex; gap: .6rem; }
-
-        .btn {
-            display: inline-block;
-            padding: .5rem 1rem;
-            border: 1px solid #fff;
-            border-radius: 999px;
-            text-decoration: none;
-            transition: background .3s, color .3s;
-        }
-
-        .btn:hover { background: #fff; color: #000; }
-        .btn.solid { background: #fff; color: #000; }
-        .btn.solid:hover { background: transparent; color: #fff; }
-
-        /* ---------- Inhalt ---------- */
-        section.block {
-            max-width: 1000px;
-            margin: auto;
-            padding: 7rem 2rem 1rem;
-        }
-
-        .eyebrow {
-            font-family: 'Inter', sans-serif;
-            font-size: .72rem;
-            letter-spacing: .25em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: .6rem;
-        }
-
-        h2 {
-            font-family: "schwarzkopf-new", serif;
-            font-weight: 400;
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        p { color: #c8d0d3; margin-bottom: 1rem; }
-
-        .video-wrap {
-            position: relative;
-            padding-bottom: 56.25%;
-            border: 1px solid var(--line);
-            overflow: hidden;
-        }
-
-        .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card { border: 1px solid var(--line); background: #0b1114; transition: border-color .3s; }
-        .card:hover { border-color: rgba(255, 255, 255, .4); }
-
-        .card img {
-            width: 100%;
-            aspect-ratio: 4/5;
-            object-fit: cover;
-            display: block;
-            filter: grayscale(.35);
-            transition: filter .4s;
-        }
-
-        .card:hover img { filter: none; }
-        .card .body { padding: 1rem; }
-        .card h3 { font-family: "schwarzkopf-new", serif; font-weight: 400; font-size: 1.2rem; margin-bottom: .3rem; }
-        .card .role { font-family: 'Inter', sans-serif; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
-        .card p { font-size: .9rem; margin: 0; }
-
-        .team-list { list-style: none; margin-bottom: 2rem; }
-        .team-list li { padding: .6rem 0; border-bottom: 1px solid var(--line); color: #c8d0d3; }
-        .team-list strong { color: var(--ink); }
-
-        .moodboard img { width: 100%; border: 1px solid var(--line); display: block; }
-        .caption { font-style: italic; color: var(--muted); margin-top: .6rem; text-align: center; }
-
-        .quote {
-            font-style: italic;
-            text-align: center;
-            font-size: 1.4rem;
-            color: var(--accent);
-            margin: 2.5rem 0;
-        }
-
-        .row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-
-        .donate {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-top: 1.5rem;
-        }
-
-        .donate a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: .5rem;
-            padding: 1rem;
-            border: 1px solid var(--line);
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-            font-size: .85rem;
-            transition: border-color .3s, transform .3s;
-        }
-
-        .donate a:hover { border-color: #fff; transform: translateY(-2px); }
-        .donate img { height: 90px; width: auto; border-radius: 4px; }
-
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 6rem;
-            border-top: 1px solid var(--line);
-            color: var(--muted);
-            font-family: 'Inter', sans-serif;
-            font-size: .8rem;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: none; } }
-
-        /* ---------- Responsive ---------- */
-        @media (max-width: 900px) {
-            .front { padding: 16px; }
-            .frame { padding: 1.2rem; min-height: calc(100vh - 32px); }
-            .topbar { grid-template-columns: 1fr auto; }
-            .brand { text-align: left; font-size: 1.4rem; }
-            .menu-toggle { display: block; }
-            .topbar ul { display: none; }
-            .topbar.open ul {
-                display: flex;
-                flex-direction: column;
-                gap: .8rem;
-                grid-column: 1 / -1;
-                padding-top: 1rem;
-            }
-            .topbar.open ul.right { justify-content: flex-start; }
-            .front-mid { flex-direction: column; }
-            .awards { justify-content: flex-start; }
-            .front-bottom { flex-direction: column-reverse; align-items: flex-start; }
-            .title-block { text-align: left; }
-            .partners { flex-direction: column; align-items: flex-start; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .frame { animation: none; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -441,44 +20,38 @@
             <source src="Schimmelreiter/Assets/teaser.mp4" type="video/mp4">
         </video>
         <button class="sound" aria-pressed="false">🔇 Ton an</button>
+        <button class="fs" aria-label="Teaser im Vollbild">
+            <svg class="open" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5V1h4M11 1h4v4M15 11v4h-4M5 15H1v-4"/></svg>
+            <svg class="close" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 1v4H1M15 5h-4V1M11 15v-4h4M1 11h4v4"/></svg>
+        </button>
 
         <div class="frame">
-            <nav class="topbar">
+            <nav class="topbar" aria-label="Hauptmenü">
                 <ul>
-                    <li><a href="#trailer">Trailer</a></li>
-                    <li><a href="#charaktere">Charaktere</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="fundraiser.html">Fundraiser</a></li>
+                    <li><a href="charaktere.html">Charaktere</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
                 </ul>
-                <div class="brand">Der Schimmelreiter</div>
+                <a class="brand" href="index.html">Der Schimmelreiter</a>
                 <button class="menu-toggle" aria-expanded="false" aria-label="Menü">&#9776;</button>
                 <ul class="right">
-                    <li><a href="#original-sage">Originalsage</a></li>
-                    <li><a href="#projektmappe">🐎 Projektmappe</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
+                    <li><a href="sage.html">Originalsage</a></li>
+                    <li><a href="projektmappe.html">🐎 Projektmappe</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
                 </ul>
             </nav>
 
             <div class="front-mid">
-                <div></div>
-
                 <div class="awards" aria-label="Auszeichnungen">
                     <div class="laurel">
                         <svg viewBox="0 0 34 78" fill="currentColor" aria-hidden="true"><path d="M28 76C12 66 4 50 5 30 6 20 9 10 14 2l1.5.8C11 11 8.5 20 8 30c-.8 19 6.5 34 21 44z"/><ellipse cx="5" cy="58" rx="3" ry="7" transform="rotate(-40 5 58)"/><ellipse cx="3" cy="45" rx="3" ry="7" transform="rotate(-20 3 45)"/><ellipse cx="3" cy="32" rx="3" ry="7" transform="rotate(-5 3 32)"/><ellipse cx="5" cy="19" rx="3" ry="7" transform="rotate(10 5 19)"/><ellipse cx="10" cy="8" rx="2.6" ry="6" transform="rotate(25 10 8)"/><ellipse cx="15" cy="62" rx="3" ry="7" transform="rotate(50 15 62)"/><ellipse cx="13" cy="48" rx="3" ry="7" transform="rotate(35 13 48)"/><ellipse cx="13" cy="34" rx="3" ry="7" transform="rotate(25 13 34)"/><ellipse cx="15" cy="21" rx="2.6" ry="6" transform="rotate(30 15 21)"/></svg>
-                        <div class="txt">
-                            <div class="kind">Gewinner</div>
-                            <div class="fest">Berlin Film Fest</div>
-                            <div class="count">1 Award</div>
-                        </div>
+                        <div class="txt"><div class="kind">Gewinner</div><div class="fest">Berlin Film Fest</div><div class="count">1 Award</div></div>
                         <svg class="r" viewBox="0 0 34 78" fill="currentColor" aria-hidden="true"><path d="M28 76C12 66 4 50 5 30 6 20 9 10 14 2l1.5.8C11 11 8.5 20 8 30c-.8 19 6.5 34 21 44z"/><ellipse cx="5" cy="58" rx="3" ry="7" transform="rotate(-40 5 58)"/><ellipse cx="3" cy="45" rx="3" ry="7" transform="rotate(-20 3 45)"/><ellipse cx="3" cy="32" rx="3" ry="7" transform="rotate(-5 3 32)"/><ellipse cx="5" cy="19" rx="3" ry="7" transform="rotate(10 5 19)"/><ellipse cx="10" cy="8" rx="2.6" ry="6" transform="rotate(25 10 8)"/><ellipse cx="15" cy="62" rx="3" ry="7" transform="rotate(50 15 62)"/><ellipse cx="13" cy="48" rx="3" ry="7" transform="rotate(35 13 48)"/><ellipse cx="13" cy="34" rx="3" ry="7" transform="rotate(25 13 34)"/><ellipse cx="15" cy="21" rx="2.6" ry="6" transform="rotate(30 15 21)"/></svg>
                     </div>
                     <div class="laurel">
                         <svg viewBox="0 0 34 78" fill="currentColor" aria-hidden="true"><path d="M28 76C12 66 4 50 5 30 6 20 9 10 14 2l1.5.8C11 11 8.5 20 8 30c-.8 19 6.5 34 21 44z"/><ellipse cx="5" cy="58" rx="3" ry="7" transform="rotate(-40 5 58)"/><ellipse cx="3" cy="45" rx="3" ry="7" transform="rotate(-20 3 45)"/><ellipse cx="3" cy="32" rx="3" ry="7" transform="rotate(-5 3 32)"/><ellipse cx="5" cy="19" rx="3" ry="7" transform="rotate(10 5 19)"/><ellipse cx="10" cy="8" rx="2.6" ry="6" transform="rotate(25 10 8)"/><ellipse cx="15" cy="62" rx="3" ry="7" transform="rotate(50 15 62)"/><ellipse cx="13" cy="48" rx="3" ry="7" transform="rotate(35 13 48)"/><ellipse cx="13" cy="34" rx="3" ry="7" transform="rotate(25 13 34)"/><ellipse cx="15" cy="21" rx="2.6" ry="6" transform="rotate(30 15 21)"/></svg>
-                        <div class="txt">
-                            <div class="kind">Gewinner</div>
-                            <div class="fest">Milan Film Fest</div>
-                            <div class="count">3 Awards</div>
-                        </div>
+                        <div class="txt"><div class="kind">Gewinner</div><div class="fest">Milan Film Fest</div><div class="count">3 Awards</div></div>
                         <svg class="r" viewBox="0 0 34 78" fill="currentColor" aria-hidden="true"><path d="M28 76C12 66 4 50 5 30 6 20 9 10 14 2l1.5.8C11 11 8.5 20 8 30c-.8 19 6.5 34 21 44z"/><ellipse cx="5" cy="58" rx="3" ry="7" transform="rotate(-40 5 58)"/><ellipse cx="3" cy="45" rx="3" ry="7" transform="rotate(-20 3 45)"/><ellipse cx="3" cy="32" rx="3" ry="7" transform="rotate(-5 3 32)"/><ellipse cx="5" cy="19" rx="3" ry="7" transform="rotate(10 5 19)"/><ellipse cx="10" cy="8" rx="2.6" ry="6" transform="rotate(25 10 8)"/><ellipse cx="15" cy="62" rx="3" ry="7" transform="rotate(50 15 62)"/><ellipse cx="13" cy="48" rx="3" ry="7" transform="rotate(35 13 48)"/><ellipse cx="13" cy="34" rx="3" ry="7" transform="rotate(25 13 34)"/><ellipse cx="15" cy="21" rx="2.6" ry="6" transform="rotate(30 15 21)"/></svg>
                     </div>
                 </div>
@@ -499,152 +72,52 @@
                 </div>
             </div>
 
-            <div class="partners">
-                <span class="label">Support &amp; Partner</span>
-                <div class="logos">
-                    <a href="https://www.furtwangen.de/startseite" target="_blank" rel="noopener noreferrer"><img src="Schimmelreiter/Assets/logo_furtwangen.png" alt="Stadt Furtwangen"></a>
-                    <a href="https://www.voehrenbach.de/startseite" target="_blank" rel="noopener noreferrer"><img src="Schimmelreiter/Assets/logo_voehrenbach.png" alt="Stadt Vöhrenbach"></a>
-                    <a href="https://www.campus-galli.de/" target="_blank" rel="noopener noreferrer"><img src="Schimmelreiter/Assets/logo_campusgalli.png" alt="Campus Galli"></a>
-                </div>
+            <div class="front-cta">
+                <span class="label">Werde Teil der Sage</span>
                 <div class="support">
                     <a class="btn solid" href="https://www.gofundme.com/f/kurzfilm-schwarzwaldsage-der-schimmelreiter" target="_blank" rel="noopener noreferrer">Jetzt unterstützen</a>
                     <a class="btn" href="https://www.paypal.com/qrcodes/managed/d93e012f-92b5-463d-ad9f-21aa31673c8d?utm_source=consweb_more" target="_blank" rel="noopener noreferrer">PayPal</a>
+                    <a class="btn" href="kontakt.html">Kontakt</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="horse">
-    <section id="trailer" class="block">
-        <div class="eyebrow">Trailer / Teaser</div>
-        <h2>Der Fluch erwacht</h2>
-        <div class="video-wrap">
-            <iframe src="https://www.youtube-nocookie.com/embed/nItFJ1XayBE?si=BaHxPPI5ikkBvWTd" title="Der Schimmelreiter – Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <section class="block">
+        <div class="eyebrow">Entdecken</div>
+        <h2>Die Welt des Schimmelreiters</h2>
+        <div class="teasers">
+            <a class="teaser" href="fundraiser.html" style="background-image:url('Schimmelreiter/Assets/stills/still_4.jpg')"><h3>Fundraiser</h3><span>Helft uns, den Film zu drehen →</span></a>
+            <a class="teaser" href="charaktere.html" style="background-image:url('Schimmelreiter/Assets/stills/still_2.jpg')"><h3>Charaktere</h3><span>Katharina, der Vogt, Jakob und Peter →</span></a>
+            <a class="teaser" href="team.html" style="background-image:url('Schimmelreiter/Assets/stills/still_3.jpg')"><h3>Team</h3><span>Die Menschen hinter der Kamera →</span></a>
+            <a class="teaser" href="galerie.html" style="background-image:url('Schimmelreiter/Assets/stills/still_1.jpg')"><h3>Galerie</h3><span>Stills und Moodboard →</span></a>
+            <a class="teaser" href="sage.html" style="background-image:url('Schimmelreiter/Assets/schimmelreiter_blau.jpg')"><h3>Originalsage</h3><span>Der Schimmelreiter von Hammereisenbach →</span></a>
+            <a class="teaser" href="kontakt.html" style="background-image:url('Schimmelreiter/Assets/galerie/mood_4.jpg')"><h3>Kontakt</h3><span>Unterstützen oder mehr erfahren →</span></a>
         </div>
     </section>
 
-    <section id="charaktere" class="block">
-        <div class="eyebrow">Die Figuren</div>
-        <h2>Charaktere</h2>
-        <div class="cards">
-            <div class="card">
-                <img src="Schimmelreiter/Assets/KATA.jpg" alt="Katharina">
-                <div class="body"><h3>Katharina</h3><p>22 Jahre alt, gläubig, leidet unter Verantwortung für ihre Familie. Wird vom Vogt verschleppt.</p></div>
-            </div>
-            <div class="card">
-                <img src="Schimmelreiter/Assets/VOGT.jpg" alt="Der Vogt (Johann)">
-                <div class="body"><h3>Der Vogt (Johann)</h3><p>37 Jahre alt, machtbesessen und gnadenlos. Verkörpert Herrschaft über Leben und Tod.</p></div>
-            </div>
-            <div class="card">
-                <img src="Schimmelreiter/Assets/JAKOB.jpg" alt="Jakob">
-                <div class="body"><h3>Jakob</h3><p>20 Jahre, verzweifelter Bruder von Katharina. Vom Wunsch nach Rache getrieben.</p></div>
-            </div>
-            <div class="card">
-                <img src="Schimmelreiter/Assets/PETER.jpg" alt="Peter">
-                <div class="body"><h3>Peter</h3><p>4 Jahre alt, Katharinas kleiner Bruder. Symbol der Unschuld inmitten der Dunkelheit.</p></div>
-            </div>
+    <section class="sponsors" aria-labelledby="sponsoren-titel">
+        <div class="eyebrow">Mit Unterstützung von</div>
+        <h2 id="sponsoren-titel">Unsere Sponsoren</h2>
+        <div class="sponsor-grid">
+            <a href="https://www.furtwangen.de/" target="_blank" rel="noopener noreferrer" title="Stadt Furtwangen"><img src="Schimmelreiter/Assets/sponsoren/furtwangen.png" alt="Stadt Furtwangen" loading="lazy"></a>
+            <a href="https://kurtrichard.com/" target="_blank" rel="noopener noreferrer" title="Polaroidparanoia – Kurt Richard"><img src="Schimmelreiter/Assets/sponsoren/polaroidparanoia.png" alt="Polaroidparanoia – Kurt Richard" loading="lazy"></a>
+            <a href="https://www.voehrenbach.de/" target="_blank" rel="noopener noreferrer" title="Stadt Vöhrenbach"><img src="Schimmelreiter/Assets/sponsoren/voehrenbach.png" alt="Stadt Vöhrenbach" loading="lazy"></a>
+            <a href="https://www.sigmaringen.de/" target="_blank" rel="noopener noreferrer" title="Stadt Sigmaringen"><img src="Schimmelreiter/Assets/sponsoren/sigmaringen.svg" alt="Stadt Sigmaringen" loading="lazy"></a>
+            <a href="https://www.messkirch.de/" target="_blank" rel="noopener noreferrer" title="Stadt Meßkirch"><img src="Schimmelreiter/Assets/sponsoren/messkirch.svg" alt="Stadt Meßkirch" loading="lazy"></a>
+            <span title="24 Seven"><img src="Schimmelreiter/Assets/sponsoren/24seven.svg" alt="24 Seven" loading="lazy"></span>
+            <a href="https://www.hörwerke-verein.de/" target="_blank" rel="noopener noreferrer" title="Hörwerke e.V."><img src="Schimmelreiter/Assets/sponsoren/hoerwerke.svg" alt="Hörwerke e.V." loading="lazy"></a>
+            <a href="https://traversale-reiten.de/" target="_blank" rel="noopener noreferrer" title="Traversale Reiten"><img src="Schimmelreiter/Assets/sponsoren/traversale_reiten.png" alt="Traversale Reiten" loading="lazy"></a>
+            <a href="https://moremajorum.jimdoweb.com/" target="_blank" rel="noopener noreferrer" title="More Majorum – Verein für lebendiges Mittelalter e.V."><img src="Schimmelreiter/Assets/sponsoren/more_majorum.png" alt="More Majorum – Verein für lebendiges Mittelalter e.V." loading="lazy"></a>
+            <a href="https://www.bachritterburg.de/" target="_blank" rel="noopener noreferrer" title="Bachritterburg Kanzach"><img src="Schimmelreiter/Assets/sponsoren/bachritterburg.png" alt="Bachritterburg Kanzach" loading="lazy"></a>
         </div>
     </section>
 
-    </div>
-
-    <section id="team" class="block">
-        <div class="eyebrow">Hinter der Kamera</div>
-        <h2>Unser Team</h2>
-        <ul class="team-list">
-            <li><strong>Kurt Richard Pätzold</strong> – Kamera und Regie. Hat Erfahrung in Deutschland und Italien gesammelt.</li>
-            <li><strong>Sami Bouguila</strong> – Ton und Musik. Schauspieler, Moderator und Sounddesigner mit Leidenschaft für Filmmusik.</li>
-            <li><strong>Amin Lakhal</strong> – Drehbuch und Produktionsassistenz. Visuell und erzählerisch begabt.</li>
-            <li><strong>Amelie Boehm</strong> – Regie, Drehbuch und Kostüm. Sprachlich kreativ mit journalistischer Erfahrung.</li>
-        </ul>
-        <div class="cards">
-            <div class="card">
-                <img src="Schimmelreiter/Assets/KURT.jpg" alt="Kurt Richard Pätzold">
-                <div class="body"><h3>Kurt Richard Pätzold</h3><div class="role">Kamera &amp; Regie</div><p>Erfahrung in Deutschland &amp; Italien</p></div>
-            </div>
-            <div class="card">
-                <img src="Schimmelreiter/Assets/SAMI.jpg" alt="Sami Bouguila">
-                <div class="body"><h3>Sami Bouguila</h3><div class="role">Ton &amp; Musik</div><p>Erfahrung in Moderation &amp; Sounddesign</p></div>
-            </div>
-            <div class="card">
-                <img src="Schimmelreiter/Assets/AMIN.jpg" alt="Amin Lakhal">
-                <div class="body"><h3>Amin Lakhal</h3><div class="role">Drehbuch &amp; Assistenz</div><p>Visuell und erzählerisch stark</p></div>
-            </div>
-            <div class="card">
-                <img src="Schimmelreiter/Assets/AME.jpg" alt="Amelie Boehm">
-                <div class="body"><h3>Amelie Boehm</h3><div class="role">Regie, Kostüm &amp; Drehbuch</div><p>Sprachlich kreativ mit Erfahrung</p></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="galerie" class="block moodboard">
-        <div class="eyebrow">Galerie</div>
-        <h2>Moodboard</h2>
-        <img src="Schimmelreiter/Assets/MOODBOARD.jpg" alt="Moodboard">
-        <p class="caption">Moodboard – Visuelle Inspiration für Stimmung, Farben &amp; Stil</p>
-    </section>
-
-    <section id="original-sage" class="block">
-        <div class="eyebrow">Die Legende</div>
-        <h2>Die Originalsage</h2>
-        <p>Im 16. Jahrhundert leiden die Bauern unter dem grausamen Vogt von Hammereisenbach. Er fordert mehr Abgaben, verschleppt die junge Katharina und entfacht eine Kette unheilvoller Ereignisse. Als sie dem kopflosen Reiter begegnet, beginnt ein düsteres Spiel zwischen Macht, Schuld und Rache.</p>
-        <p class="quote">"Wer den Wald mit Blut tränkt, wird ewig in ihm reiten."</p>
-        <p>Die Originalsage "Der Schimmelreiter von Hammereisenbach" erzählt von einem verhassten Vogt der Burg Neufürstenberg, der die Bauern zu Frondiensten zwang und Materiallieferungen einforderte. Im 16. Jahrhundert spitzte sich die Lage zu, und die Bauern lehnten sich gegen den Tyrannen auf, indem sie ihm bei der Jagd auflauerten.</p>
-        <p>Der Vogt, der die Gefahr witterte, ließ die Hufeisen seines Pferdes verkehrt herum aufschlagen, um die Bauern auf eine falsche Fährte zu locken. Doch die Bauern durchschauten seine Intrige, was ihre Wut nur noch mehr schürte. Als der Vogt erkannte, dass er nicht mehr sicher war, beschloss er, verkleidet als einfacher Knecht, nach Freiburg zu fliehen und ritt in Richtung Urach.</p>
-        <p>Doch die Bauern lauerten ihm in der ganzen Umgebung auf, überwältigten ihn, rissen ihn von seinem Schimmel und schlugen ihm den Kopf ab. Seit jeher soll der Vogt auf seinem Schimmel umhergeistern und seinen Kopf auf einem Silbertablett unter dem Arm tragen, wodurch seine Schreckensherrschaft ewig fortwährt.</p>
-        <p>Unsere Verfilmung stellt die Frage: Was, wenn der Vogt den Bauern außer Abgaben noch etwas anderes genommen hat? Wenn seine Schreckensherrschaft noch viel tiefer reicht und dunkle Mächte ihre Finger im Spiel haben?</p>
-    </section>
-
-    <section id="projektmappe" class="block">
-        <div class="eyebrow">Download</div>
-        <h2>Projektmappe</h2>
-        <p>Hier können Sie die vollständige Projektmappe als PDF herunterladen, um mehr über unser Filmprojekt zu erfahren.</p>
-        <div class="row">
-            <a class="btn" href="https://raw.githubusercontent.com/AminLakhal/Schimmelreiter/main/Schimmelreiter/Assets/Projektmappe%20-%20Der%20Schimmelreiter%20Eine%20Sage%20aus%20dem%20Schwarzwald.pdf" target="_blank" download>Projektmappe herunterladen (PDF)</a>
-        </div>
-    </section>
-
-    <section id="kontakt" class="block">
-        <div class="eyebrow">Kontakt &amp; Support</div>
-        <h2>Unterstützen Sie uns</h2>
-        <p>Sie möchten uns unterstützen oder mehr erfahren? Schreiben Sie uns gerne unter:<br>
-            <a href="mailto:kurzfilm.schimmelreiter@web.de">kurzfilm.schimmelreiter@web.de</a></p>
-        <div class="donate">
-            <a href="https://www.gofundme.com/f/kurzfilm-schwarzwaldsage-der-schimmelreiter" target="_blank" rel="noopener noreferrer">
-                <img src="Schimmelreiter/Assets/gofundme-logo-png_seeklogo-447152.png" alt="GoFundMe">Jetzt unterstützen!
-            </a>
-            <a href="https://www.paypal.com/qrcodes/managed/d93e012f-92b5-463d-ad9f-21aa31673c8d?utm_source=consweb_more" target="_blank" rel="noopener noreferrer">
-                <img src="Schimmelreiter/Assets/QR Code Support.jpg" alt="PayPal QR Code">Per PayPal spenden
-            </a>
-        </div>
-    </section>
-
-    <footer>© 2025 Der Schimmelreiter – Ein Kurzfilmprojekt aus dem Hochschwarzwald</footer>
-
-    <script>
-        const topbar = document.querySelector('.topbar');
-        const toggle = document.querySelector('.menu-toggle');
-        toggle.addEventListener('click', () => {
-            const open = topbar.classList.toggle('open');
-            toggle.setAttribute('aria-expanded', open);
-        });
-        const video = document.querySelector('.front video');
-        const sound = document.querySelector('.sound');
-        video.muted = true;
-        video.play().catch(() => {});
-        sound.addEventListener('click', () => {
-            video.muted = !video.muted;
-            if (!video.muted) video.play();
-            sound.textContent = video.muted ? '🔇 Ton an' : '🔊 Ton aus';
-            sound.setAttribute('aria-pressed', !video.muted);
-        });
-        // Ton aus, sobald man die Front page verlässt
-        new IntersectionObserver(([e]) => {
-            if (!e.isIntersecting && !video.muted) sound.click();
-        }, { threshold: .2 }).observe(video);
-
-        topbar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => topbar.classList.remove('open')));
-    </script>
+    <footer>
+        <nav aria-label="Fußzeile"><a href="index.html">Start</a> <a href="fundraiser.html">Fundraiser</a> <a href="charaktere.html">Charaktere</a> <a href="team.html">Team</a> <a href="galerie.html">Galerie</a> <a href="sage.html">Originalsage</a> <a href="projektmappe.html">Projektmappe</a> <a href="kontakt.html">Kontakt</a></nav>
+        © 2025 Der Schimmelreiter – Ein Kurzfilmprojekt aus dem Hochschwarzwald
+    </footer>
+    <script src="main.js"></script>
 </body>
 
 </html>
