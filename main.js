@@ -1,5 +1,20 @@
 // Der Schimmelreiter – gemeinsames Script für alle Seiten
 
+// Wechselnde Hintergrund-Stills im Seitenkopf: bei jedem Laden ein anderes,
+// nie dasselbe wie auf den zuletzt besuchten Seiten
+const heroEl = document.querySelector('.page-hero');
+if (heroEl) {
+    const pool = Array.from({ length: 10 }, (_, i) => `Schimmelreiter/Assets/stills/still_${i + 1}.jpg`);
+    let recent = [];
+    try { recent = JSON.parse(sessionStorage.getItem('sr-recent') || '[]'); } catch (e) {}
+    let choices = pool.filter(p => !recent.includes(p));
+    if (!choices.length) { recent = []; choices = pool; }
+    const pick = choices[Math.floor(Math.random() * choices.length)];
+    heroEl.style.backgroundImage = `url('${pick}')`;
+    recent = [pick, ...recent].slice(0, 6);
+    try { sessionStorage.setItem('sr-recent', JSON.stringify(recent)); } catch (e) {}
+}
+
 // Mobiles Menü
 const topbar = document.querySelector('.topbar');
 const toggle = document.querySelector('.menu-toggle');
