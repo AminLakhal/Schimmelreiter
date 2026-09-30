@@ -565,3 +565,38 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
     .cast-wrap { grid-template-columns: 1fr; }
     .cast-wrap .poster { position: static; max-width: 260px; margin: 0 auto; }
 }
+
+/* Mobiles Menü als ruhiges Vollbild-Overlay */
+@media (max-width: 960px) {
+    .topbar.open {
+        position: fixed;
+        inset: 0;
+        z-index: 3000;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 1.1rem var(--gutter) 2rem;
+        background: rgba(5, 8, 10, .98);
+        overflow-y: auto;
+        animation: pageIn .3s ease both;
+    }
+    .topbar.open .brand { order: 0; align-self: flex-start; }
+    .topbar.open .menu-toggle { order: 0; position: absolute; top: .9rem; right: var(--gutter); }
+    .topbar.open ul { display: flex; flex-direction: column; gap: 0; padding: 0; font-size: 1.35rem; }
+    .topbar.open ul:first-of-type { margin-top: 2.2rem; }
+    .topbar.open ul li { border-bottom: 1px solid var(--line); }
+    .topbar.open ul a { display: flex; align-items: center; gap: .6rem; padding: 1rem .2rem; font-family: "schwarzkopf-new", serif; color: var(--ink); }
+    .topbar.open ul a::after { display: none; }
+    .topbar.open ul a[aria-current="page"] { color: var(--gold); }
+    .topbar.open ul.right { padding-bottom: 0; }
+    .topbar.open a.ig { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--muted); border: 0; }
+    .topbar.open ul.right li:last-child { border-bottom: 0; margin-top: 1rem; }
+    body:has(.topbar.open) { overflow: hidden; }
+}
+@media (max-width: 960px) {
+    /* backdrop-filter würde das fixierte Overlay auf den Kopf bzw. Rahmen begrenzen */
+    .site-header.menu-open, .frame:has(.topbar.open) { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; animation: none; }
+    .site-header.menu-open { padding: 0; border: 0; background: none; }
+    .front:has(.topbar.open) .sound, .front:has(.topbar.open) .fs { display: none; }
+}
