@@ -113,3 +113,51 @@ if (form) {
         }
     });
 }
+
+// ---------- Fließende Animationen ----------
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Elemente beim Scrollen weich einblenden, Geschwister nacheinander
+if ('IntersectionObserver' in window) {
+    const groups = ['.block > .eyebrow, .block > h2, .block > p, .block > .row, .block > .video-wrap, .block > .team-list, .block > form, .block > .donate, .block > .caption',
+        '.cards > *', '.teasers > *', '.gallery > *', '.ig-grid > *', '.sponsor-grid > *', '.sponsors > .eyebrow, .sponsors > h2'];
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    groups.forEach(sel => {
+        const seen = new Map();
+        document.querySelectorAll(sel).forEach(el => {
+            const i = seen.get(el.parentElement) || 0;
+            seen.set(el.parentElement, i + 1);
+            el.classList.add('reveal');
+            el.style.setProperty('--d', Math.min(i, 8) * 0.07 + 's');
+            io.observe(el);
+        });
+    });
+
+    // Parallaxe im Hero der Unterseiten
+    const hero = document.querySelector('.page-hero');
+    if (hero && !reduce) {
+        let ticking = false;
+        addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                hero.style.setProperty('--py', Math.min(scrollY, innerHeight) * 0.25 + 'px');
+                ticking = false;
+            });
+        }, { passive: true });
+    }
+
+    // Weicher Übergang zwischen den Seiten
+    document.querySelectorAll('a[href$=".html"]').forEach(a => {
+        a.addEventListener('click', e => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
+            e.preventDefault();
+            document.body.classList.add('leaving');
+            setTimeout(() => { location.href = a.href; }, 320);
+        });
+    });
+    // Beim Zurück-Navigieren aus dem Cache wieder einblenden
+    addEventListener('pageshow', e => { if (e.persisted) document.body.classList.remove('leaving'); });
+}
