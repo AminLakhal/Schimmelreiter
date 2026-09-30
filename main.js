@@ -121,6 +121,7 @@ if (form) {
             status.classList.add('ok');
             status.textContent = 'Danke! Ihre Nachricht ist bei uns angekommen.';
         } catch (err) {
+            console.warn('Kontaktformular:', err.message);
             status.classList.add('err');
             status.textContent = 'Das hat leider nicht geklappt. Bitte schreiben Sie uns direkt an kurzfilm.schimmelreiter@web.de.';
         } finally {
