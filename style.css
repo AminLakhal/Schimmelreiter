@@ -600,3 +600,15 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
     .site-header.menu-open { padding: 0; border: 0; background: none; }
     .front:has(.topbar.open) .sound, .front:has(.topbar.open) .fs { display: none; }
 }
+
+/* Startseite: Pferd hinter „Die Welt des Schimmelreiters“, unten ausgeblendet */
+.horse-bg { position: relative; isolation: isolate; padding: 5rem 0 4rem; }
+.horse-bg::before {
+    content: ''; position: absolute; inset: 0; z-index: -2;
+    background: url("Schimmelreiter/Assets/schimmelreiter_blau.jpg") center 40% / cover no-repeat;
+    filter: brightness(2);
+}
+.horse-bg::after {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(to bottom, var(--bg) 0%, rgba(5, 8, 10, 0) 16%, rgba(5, 8, 10, .15) 50%, rgba(5, 8, 10, .75) 78%, var(--bg) 100%);
+}
