@@ -43,7 +43,7 @@
 
     <section class="block">
         <form id="kontakt-form" class="form" action="https://formsubmit.co/ajax/kurzfilm.schimmelreiter@web.de" method="POST">
-            <input type="hidden" name="_subject" value="Neue Nachricht über die Schimmelreiter-Website">
+            <input type="hidden" name="_subject" value="Schimmelreiter-Website: neue Nachricht">
             <input type="hidden" name="_template" value="table">
             <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div>
@@ -56,13 +56,7 @@
             </div>
             <div class="full">
                 <label for="f-thema">Anliegen</label>
-                <select id="f-thema" name="Anliegen">
-                    <option>Allgemeine Anfrage</option>
-                    <option>Sponsoring &amp; Unterstützung</option>
-                    <option>Presse</option>
-                    <option>Mitwirken am Film</option>
-                    <option>Festival &amp; Vorführung</option>
-                </select>
+                <input id="f-thema" name="Anliegen" type="text" placeholder="z. B. Sponsoring, Presse, Mitwirken …" required>
             </div>
             <div class="full">
                 <label for="f-text">Nachricht</label>
