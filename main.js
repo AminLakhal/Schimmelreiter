@@ -4,7 +4,7 @@
 // nie dasselbe wie auf den zuletzt besuchten Seiten
 const heroEl = document.querySelector('.page-hero');
 if (heroEl) {
-    const pool = Array.from({ length: 10 }, (_, i) => `Schimmelreiter/Assets/stills/still_${i + 1}.jpg`);
+    const pool = Array.from({ length: 10 }, (_, i) => `Schimmelreiter/Assets/stills/still_${i + 1}.webp`);
     let recent = [];
     try { recent = JSON.parse(sessionStorage.getItem('sr-recent') || '[]'); } catch (e) {}
     let choices = pool.filter(p => !recent.includes(p));

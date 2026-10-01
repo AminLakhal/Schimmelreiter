@@ -605,7 +605,7 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
 .horse-bg { position: relative; isolation: isolate; padding: 5rem 0 4rem; }
 .horse-bg::before {
     content: ''; position: absolute; inset: 0; z-index: -2;
-    background: url("Schimmelreiter/Assets/schimmelreiter_blau.jpg") center 40% / cover no-repeat;
+    background: url("Schimmelreiter/Assets/schimmelreiter_blau.webp") center 40% / cover no-repeat;
     filter: brightness(2);
 }
 .horse-bg::after {
@@ -628,3 +628,9 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
 }
 .teaser::before { z-index: 0; }
 .teaser:hover::after { transform: scale(1.08); }
+
+.award-link { display: inline-block; margin-top: .6rem; padding-top: .6rem; border-top: 1px solid var(--line); width: 100%; font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--gold); text-decoration: none; }
+.award-link:hover { text-decoration: underline; }
+/* Lücke zwischen Lorbeer und Karte überbrücken, damit der Link erreichbar bleibt */
+.award-pop::after { content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
+.front-mid { position: relative; z-index: 5; }
