@@ -617,3 +617,14 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
 .big { display: inline-block; text-align: left; }
 .big .der { display: block; font-size: .58em; line-height: 1; margin-bottom: -.08em; }
 .big .name { display: block; padding-left: .5em; line-height: 1.05; }
+
+/* Kacheln: Bild füllt die Kachel proportional (kein Wiederholen, kein Quetschen) */
+.teaser { isolation: isolate; background-size: 0 0; background-repeat: no-repeat; }
+.teaser:hover { background-size: 0 0; }
+.teaser::after {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background-image: inherit; background-size: cover; background-position: center 30%; background-repeat: no-repeat;
+    transition: transform 1.2s var(--ease, ease);
+}
+.teaser::before { z-index: 0; }
+.teaser:hover::after { transform: scale(1.08); }
