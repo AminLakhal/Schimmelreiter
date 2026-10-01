@@ -612,3 +612,8 @@ body.leaving { opacity: 0; transition: opacity .35s ease; }
     content: ''; position: absolute; inset: 0; z-index: -1;
     background: linear-gradient(to bottom, var(--bg) 0%, rgba(5, 8, 10, 0) 16%, rgba(5, 8, 10, .15) 50%, rgba(5, 8, 10, .75) 78%, var(--bg) 100%);
 }
+
+/* Titel wie im Logo: „Der“ klein oben links, „Schimmelreiter“ darunter eingerückt */
+.big { display: inline-block; text-align: left; }
+.big .der { display: block; font-size: .58em; line-height: 1; margin-bottom: -.08em; }
+.big .name { display: block; padding-left: .5em; line-height: 1.05; }
