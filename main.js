@@ -99,7 +99,7 @@ if (lb) {
     });
 }
 
-// Kontaktformular: wird über FormSubmit an kurzfilm.schimmelreiter@web.de geschickt
+// Kontaktformular: wird über Formspree verschickt (Endpoint im action-Attribut)
 const form = document.querySelector('#kontakt-form');
 if (form) {
     const status = form.querySelector('.form-status');
